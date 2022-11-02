@@ -2,22 +2,11 @@
 
 build the project:
 ```bash
-npm run build
+yarn run build
 ```
 
 start the project:
 ```bash
-npm start
+yarn start
 ```
 
-example settings for VS Code(`.vscode/settings.json`): 
-```json
-{
-    "editor.codeActionsOnSave": {
-        "source.fixAll.eslint": true
-    },
-    "eslint.validate": [
-        "javascript", "typescript"
-    ]
-}
-```
