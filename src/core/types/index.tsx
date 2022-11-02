@@ -1,3 +1,5 @@
+import { DeLabConnect } from "index";
+
 type DeLabEvent = {
     data?: any;
 } & Event
@@ -27,12 +29,12 @@ interface DeLabTransaction {
     payload?: string // Optional serialized to base64 string payload cell
 }
 interface DeLabModalConfig {
-    DeLabConnectObject: any,
+    DeLabConnectObject: DeLabConnect,
     scheme: DeLabScheme
 }
 
 interface DeLabButtonConfig {
-    DeLabConnectObject: any,
+    DeLabConnectObject: DeLabConnect,
     scheme: DeLabScheme
 }
 
