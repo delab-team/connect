@@ -1,7 +1,7 @@
 {
     "name": "@delab-team/connect",
     "version": "1.0.4",
-    "homepage": "./",
+    "homepage": "https://connect-example.delab.team",
     "main": "./dist/index.js",
     "module": "./dist/index.js",
     "types": "./dist/index.d.ts",
