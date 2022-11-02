@@ -1,0 +1,63 @@
+{
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": { "project": "./tsconfig.json", "tsconfigRootDir": "./", "sourceType": "module" },
+    "plugins": ["@typescript-eslint", "import"],
+    "extends": [
+        "airbnb-base",
+        "airbnb-typescript/base",
+        "plugin:import/errors",
+        "plugin:import/warnings",
+        "plugin:import/typescript"
+    ],
+    "ignorePatterns": [".eslintrc.json"],
+    "root": true,
+    "env": { "node": true, "jest": true },
+    "settings": {
+        "import/resolver": {
+            "typescript": { "extensions": [".ts", ".tsx"], "moduleDirectory": ["src", "node_modules"] },
+            "node": {}
+        }
+    },
+    "rules": {
+        "prefer-template": "off",
+        "lines-between-class-members": ["error", "always", { "exceptAfterSingleLine": true }],
+        "no-plusplus": "off",
+        "prefer-destructuring": "off",
+        "no-multi-spaces": "off",
+        "no-console": "off",
+        "no-shadow": "off",
+        "no-bitwise": "off",
+        "no-unused-vars": "off",
+        "array-bracket-spacing": ["error", "always"],
+        "object-curly-newline": ["error", { "multiline": true }],
+        "no-useless-constructor": "off",
+        "@typescript-eslint/indent": ["error", 4, { "SwitchCase": 1 }],
+        "@typescript-eslint/space-before-function-paren": ["error", "always"],
+        "@typescript-eslint/semi": ["error", "never"],
+        "@typescript-eslint/comma-dangle": ["error", "never"],
+        "@typescript-eslint/object-curly-spacing": ["error", "always"],
+        "@typescript-eslint/no-shadow": ["error"],
+        "@typescript-eslint/no-useless-constructor": "off",
+        "@typescript-eslint/interface-name-prefix": "off",
+        "@typescript-eslint/explicit-function-return-type": "off",
+        "@typescript-eslint/explicit-module-boundary-types": ["error", { "allowedNames": ["transform"] }],
+        "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
+        "@typescript-eslint/no-explicit-any": "off",
+        "import/prefer-default-export": "off",
+        "import/no-default-export": "error",
+        "space-before-function-paren": ["error", "always"],
+        "no-underscore-dangle": "off",
+        "arrow-parens": [2, "as-needed", { "requireForBlockBody": true }],
+        "@typescript-eslint/type-annotation-spacing": "warn",
+        "import/no-extraneous-dependencies": [
+            "error",
+            { "devDependencies": ["**/*.test.ts", "**/*.spec.ts", "./webpack.config.json"] }
+        ],
+        "import/extensions": [
+            "error",
+            "ignorePackages",
+            { "js": "never", "mjs": "never", "jsx": "never", "ts": "never", "tsx": "never" }
+        ],
+        "key-spacing": ["error", { "afterColon": true }]
+    }
+}

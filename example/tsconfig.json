@@ -1,0 +1,40 @@
+{
+    "compilerOptions": {
+        "target": "ES2021",
+        "lib": [
+            "dom",
+            "dom.iterable",
+            "esnext"
+        ],
+        "allowJs": true,
+        "skipLibCheck": true,
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "strict": true,
+        "forceConsistentCasingInFileNames": true,
+        "noFallthroughCasesInSwitch": true,
+        "module": "ESNext",
+        "moduleResolution": "node",
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "noEmit": false,
+        "jsx": "react-jsx",
+        "paths": {
+            "stream": ["./node_modules/readable-stream"],
+            "crypto": ["./node_modules/crypto-browserify"],
+            "assert": ["./node_modules/assert"],
+            "http": ["./node_modules/stream-http"],
+            "https": ["./node_modules/https-browserify"],
+            "os": ["./node_modules/os-browserify/browser"],
+            "url": ["./node_modules/url"]
+        }
+    },
+    "ts-node": {
+        "compilerOptions": {
+            "module": "CommonJS"
+        }
+    },
+    "include": [
+        "src"
+    ]
+}

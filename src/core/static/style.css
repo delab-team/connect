@@ -1,0 +1,98 @@
+/* @import "./static/font/stylesheet.css"; */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+.vkuispace_gray, [scheme=space_gray], body[scheme=space_gray] {
+    --accent: #fff;
+    --button_primary_background: #fff;
+    /* --background_content: #131823; */
+    --background_content: #000;
+}
+.vkuibright_light, :root, [scheme=bright_light], body[scheme=bright_light] {
+    --accent: #000;
+    --button_primary_background: #000;
+    --header_tint: #000;
+}
+#root {
+    --button_outline_border: #151515;
+    --button_outline_foreground: #151515;
+    --vkui--font_headline1--font_size--compact: 17px!important;
+}
+
+html,
+body {
+    margin: 0!important;
+    padding: 0!important;
+}
+
+
+body * {
+    font-family: 'Inter', sans-serif;
+}
+ input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+*:not(input, textarea){ user-select:none; }
+
+.vkuiRichCell--text-ellipsis .vkuiRichCell__caption, 
+.vkuiRichCell--text-ellipsis .vkuiRichCell__children, 
+.vkuiRichCell--text-ellipsis .vkuiRichCell__subhead, 
+.vkuiRichCell--text-ellipsis .vkuiRichCell__text,
+.Subhead {
+    white-space: break-spaces!important;
+}
+
+.vkuiGroup--card.vkuiGroup--padding-m>.vkuiGroup__inner, .vkuiGroup__inner {
+    height: 99vh;
+}
+
+.vkuiSubhead--sizeY-compact {
+    text-align: center;
+}
+
+.vkuiHorizontalCell__body {
+    width: 110px;
+    border-radius: 20px!important;
+    /* margin-right: 20px; */
+}
+.vkuiHorizontalScroll {
+    margin-bottom: 20px;
+}
+
+.vkuiHorizontalCell__body[disabled] {
+    opacity: 0.5;
+}
+
+.vkuiModalPage--s .vkuiModalPage__in-wrap {
+    /* width: 450px; */
+    max-width: 360px!important;
+}
+.vkuiModalPage--s .Avatar {
+    border-radius: 20px!important;
+}
+
+.vkuiModalPage--desktop .vkuiModalPage__in {
+    border-radius: 30px!important;
+}
+
+.vkuiRichCell--text-ellipsis .vkuiRichCell__caption, .vkuiRichCell--text-ellipsis .vkuiRichCell__children, .vkuiRichCell--text-ellipsis .vkuiRichCell__subhead, .vkuiRichCell--text-ellipsis .vkuiRichCell__text, .Subhead {
+    text-align: center;
+    font-weight: 400!important;
+    font-size: 13px!important;
+}
+
+.vkuiPanelHeader--android.vkuiPanelHeader--no-after .vkuiPanelHeader__content>*, .vkuiPanelHeader--vkcom.vkuiPanelHeader--no-after .vkuiPanelHeader__content>* {
+    text-align: center;
+}
+
+
+@media (max-width: 660px) {
+
+    .vkuiModalPage--s .vkuiModalPage__in-wrap {
+        max-width: none!important;
+    }
+    .vkuiModalRoot__viewport {
+        height: 600px;
+    }
+}
