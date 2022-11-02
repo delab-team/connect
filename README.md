@@ -64,11 +64,11 @@ DeLabConnector.loadWallet()
 ```
 
 DeLabModal must be children of the root React Component
-```tsx
-    // supported scheme: 'light' | 'dark'
-    <DeLabButton DeLabConnectObject={DeLabConnector} scheme={'dark'} />
-    // ...
-    <DeLabModal DeLabConnectObject={DeLabConnector} scheme={'dark'} />
+```jsx
+// supported scheme: 'light' | 'dark'
+<DeLabButton DeLabConnectObject={DeLabConnector} scheme={'dark'} />
+// ...
+<DeLabModal DeLabConnectObject={DeLabConnector} scheme={'dark'} />
 ```
 
 # License
