@@ -4,7 +4,7 @@
 ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
 [![TON](https://img.shields.io/badge/based%20on-TON-blue?style=for-the-badge)](https://ton.org/)
 [![npm](https://img.shields.io/npm/v/@delab-team/connect?style=for-the-badge)](https://www.npmjs.com/package/@delab-team/connect)
-[![GitHub license](https://img.shields.io/github/license/delab-team/connect?style=for-the-badge)](https://github.com/delab-team/connect/blob/main/LICENSE)
+<a href="https://github.com/delab-team/connect/blob/main/LICENSE"><img alt="GitHub license" src="https://img.shields.io/github/license/delab-team/connect?style=for-the-badge"></a>
 
 Modal package with different TON wallets for React JS.
 
