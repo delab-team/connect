@@ -5,7 +5,6 @@ Typescript
 tsconfig*.json
 dist/tsconfig.build.tsbuildinfo
 
-dist
 node_modules
 .DS_Store
 build
