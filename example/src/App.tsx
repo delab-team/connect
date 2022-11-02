@@ -1,6 +1,6 @@
 
 import React, { useEffect } from 'react'
-import { DeLabModal, DeLabButton, DeLabConnect } from '../../DeLab Connect/dist'
+import { DeLabModal, DeLabButton, DeLabConnect } from '@delab-team/connect'
 
 import {
     DeLabNetwork,
@@ -9,7 +9,7 @@ import {
     DeLabConnecting,
     DeLabTransaction,
     DeLabEvent
-} from '../../DeLab Connect/dist'
+} from '@delab-team/connect'
 import { QRCodeSVG } from 'qrcode.react'
 
 const DeLabConnector = new DeLabConnect('https://google.com', 'Test')
