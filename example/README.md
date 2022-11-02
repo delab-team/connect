@@ -1,4 +1,8 @@
-# Example DeLab Connect
+# Example of DeLab Connect
+
+![example](./img/example.png)
+
+# Usage
 
 build the project:
 ```bash
@@ -10,3 +14,6 @@ start the project:
 yarn start
 ```
 
+# License
+
+[MIT License Copyright (c) 2022 DeLab Team](LICENSE)

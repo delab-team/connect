@@ -1,6 +1,6 @@
 {
     "name": "@delab-team/connect",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "homepage": "./",
     "main": "./dist/index.js",
     "module": "./dist/index.js",
@@ -9,7 +9,13 @@
     "repository": "https://github.com/delab-team/connect",
     "author": "DeLab Team",
     "license": "MIT",
-    "keywords": ["package", "blockchain", "ton", "connect", "web3"],
+    "keywords": [
+        "package",
+        "blockchain",
+        "ton",
+        "connect",
+        "web3"
+    ],
     "scripts": {
         "start": "webpack-dev-server --mode development",
         "build:clean": "rm -rf dist",
