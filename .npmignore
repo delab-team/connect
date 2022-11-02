@@ -1,6 +1,8 @@
 /node_modules
 /src
 
+.github
+
 Typescript
 tsconfig*.json
 dist/tsconfig.build.tsbuildinfo
