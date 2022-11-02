@@ -58,6 +58,11 @@ const DeLabModal: React.FC<DeLabModalConfig> = (props: DeLabModalConfig) => {
 
             setActiveModal(data.data ? 'connect' : null)
             // console.log('modal', data.data)
+
+            if (!data.data) {
+                setType(0)
+                setLink('')
+            }
         })
 
         props.DeLabConnectObject.on('link', (data: DeLabEvent) => {
