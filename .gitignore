@@ -4,8 +4,8 @@ node_modules
 build
 *.log
 
-src/examples/node_modules
-src/examples/build
-src/examples/.DS_Store
-src/examples/dist
-src/examples/*.log
+src/example/node_modules
+src/example/build
+src/example/.DS_Store
+src/example/dist
+src/example/*.log

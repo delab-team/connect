@@ -1,11 +1,15 @@
 {
     "name": "@delab-team/connect",
-    "version": "0.1.1",
-    "private": true,
+    "version": "1.0.1",
     "homepage": "./",
     "main": "./dist/index.js",
     "module": "./dist/index.js",
     "types": "./dist/index.d.ts",
+    "description": "Modal package with different TON wallets for React JS",
+    "repository": "https://github.com/delab-team/connect",
+    "author": "DeLab Team",
+    "license": "MIT",
+    "keywords": ["package", "blockchain", "ton", "connect", "web3"],
     "scripts": {
         "start": "webpack-dev-server --mode development",
         "build:clean": "rm -rf dist",
