@@ -14,5 +14,55 @@ Package & CLI to generate op's by tl-b
 yarn add @delab-team/connect
 ```
 
-const DeLabConnector = new DeLabConnect('https://google.com', 'Test')
+subscribes events
+- connect
+- disconnect
+- approve-link (only tonkeeper)
+- error
+- error-transaction
+- error-toncoinwallet
+- error-tonhub
+- error-tonkeeper
 
+```typescript
+import { 
+    DeLabModal, 
+    DeLabButton, 
+    DeLabConnect, 
+    DeLabConnecting, 
+    DeLabTransaction, 
+    DeLabEvent 
+} from '@delab-team/connect'
+
+const DeLabConnector = new DeLabConnect('https://google.com', 'Test', 'mainnet')
+// create DeLabConnect only outside the React Component
+
+DeLabConnector.on('connect', (data: DeLabEvent) => {
+    const connectConfig: DeLabConnecting = data.data
+    const trans: DeLabTransaction = {
+        to: 'EQCkR1cGmnsE45N4K0otPl5EnxnRakmGqeJUNua5fkWhales',
+        value: '1000000'
+    }
+    const dataTx2 = await DeLabConnector.sendTransaction(trans)
+    if (connectConfig.typeConnect === 'tonkeeper') {
+        // code to display qrcode
+        console.log('link tonkeeper', dataTx2)
+    }
+})
+
+DeLabConnector.on('disconnect', () => {
+    console.log('disconect')
+})
+
+DeLabConnector.loadWallet()
+// use loadWallet() after installs subscribes
+```
+
+scheme: 'light' | 'dark'
+
+DeLabModal must be children of root React Component
+```tsx
+    <DeLabButton DeLabConnectObject={DeLabConnector} scheme={'dark'} />
+    ...
+    <DeLabModal DeLabConnectObject={DeLabConnector} scheme={'dark'} />
+```
