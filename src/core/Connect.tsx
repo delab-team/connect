@@ -16,6 +16,8 @@ import {
     DeLabTransaction
 } from './types'
 
+import * as pkg from '../../package.json'
+
 const axios = require('axios').default
 
 declare global {
@@ -64,6 +66,8 @@ class DeLabConnect {
         this._connectorTonHub = new TonhubConnector({ network: network === 'mainnet' ? 'mainnet' : 'sandbox' })
 
         this.loadWallet()
+
+        console.log('v: ', pkg.version)
     }
 
     public loadWallet (): void {
