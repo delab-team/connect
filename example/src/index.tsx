@@ -12,16 +12,6 @@ eruda.init({
     tool: [ 'console', 'elements' ]
 })
 
-// const Root: React.FC = () => {
-
-//     return (
-//         <React.StrictMode>
-//             <App />
-//         </React.StrictMode>
-//     )
-// }
-
-
 ReactDOM.render(
     <React.StrictMode>
             <App />

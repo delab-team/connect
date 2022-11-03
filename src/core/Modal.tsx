@@ -20,10 +20,8 @@ import { QRCodeSVG } from 'qrcode.react'
 import React, { useEffect, useState } from 'react'
 import { Icon20ComputerOutline, Icon20SmartphoneOutline, Icon24Dismiss, Icon28ChevronLeftOutline } from '@vkontakte/icons'
 
-import {
-    DeLabModalConfig,
-    DeLabEvent
-} from './types'
+import { DeLabModalConfig } from './types/react'
+import { DeLabEvent } from './types/index'
 
 import '@vkontakte/vkui/dist/vkui.css'
 import './static/modal.css'
@@ -58,6 +56,11 @@ const DeLabModal: React.FC<DeLabModalConfig> = (props: DeLabModalConfig) => {
 
             setActiveModal(data.data ? 'connect' : null)
             // console.log('modal', data.data)
+
+            if (!data.data) {
+                setType(0)
+                setLink('')
+            }
         })
 
         props.DeLabConnectObject.on('link', (data: DeLabEvent) => {
@@ -173,7 +176,7 @@ const DeLabModal: React.FC<DeLabModalConfig> = (props: DeLabModalConfig) => {
                                                         />
                                                     </HorizontalCell>
 
-                                                    <HorizontalCell size="l" header="Uniton" disabled>
+                                                    <HorizontalCell size="l" header="Uniton" onClick={() => props.DeLabConnectObject.connectToncoinWallet()}>
                                                         <Avatar
                                                             size={60}
                                                             mode="app"

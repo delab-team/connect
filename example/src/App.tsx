@@ -88,11 +88,11 @@ export const App: React.FC = () => {
     }, [])
 
     return (
-        <div>
+        <div style={{height: '100vh', background: '#161726', color: '#fff'}}>
             <div style={{ display: 'flex', justifyContent: 'center'}}>
                 <div style={{ display: 'flex', justifyContent: 'center', width: '550px', paddingTop: '20px'}}>
                     {!isConnected  ? 
-                        <DeLabButton DeLabConnectObject={DeLabConnector} scheme={'light'} /> 
+                        <DeLabButton DeLabConnectObject={DeLabConnector} scheme={'dark'} /> 
                     : null }
 
                     {isConnected ? <div>
@@ -110,14 +110,14 @@ export const App: React.FC = () => {
                         </button>
                         <p>transaction: {JSON.stringify(dataTx)}</p>
                         {approveLink !== '' ?
-                            <div style={{ borderRadius: '20px', padding: '20px', background: '#fff', marginBottom: '20px', width: '220px' }}>
+                            <div style={{ borderRadius: '20px', padding: '20px', background: '#fff', marginBottom: '20px', width: '200px' }}>
                                 <QRCodeSVG value={approveLink} width={200} height={200} />
                                 </div>
                         : null}
                     </div> : null }
                 </div>
             </div>
-            <DeLabModal DeLabConnectObject={DeLabConnector} scheme={'light'} />
+            <DeLabModal DeLabConnectObject={DeLabConnector} scheme={'dark'} />
         </div>
     )
 }
