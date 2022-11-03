@@ -16,8 +16,6 @@ import {
     DeLabTransaction
 } from './types'
 
-import * as pkg from '../../package.json'
-
 const axios = require('axios').default
 
 declare global {
@@ -67,7 +65,7 @@ class DeLabConnect {
 
         this.loadWallet()
 
-        console.log('v: ', pkg.version)
+        console.log('v: 1.1.5')
     }
 
     public loadWallet (): void {

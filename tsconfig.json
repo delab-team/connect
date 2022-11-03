@@ -36,8 +36,5 @@
         "compilerOptions": {
             "module": "CommonJS"
         }
-    },
-    "include": [
-        "./src/*.tsx",
-    ]
+    }
 }
