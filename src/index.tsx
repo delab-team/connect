@@ -5,24 +5,29 @@ import { DeLabButton } from './core/Button'
 import {
     DeLabEvent,
     DeLabNetwork,
-    DeLabScheme,
     DeLabTypeConnect,
     DeLabAddress,
     DeLabError,
     DeLabConnecting,
-    DeLabTransaction,
-    DeLabModalConfig
+    DeLabTransaction
 } from './core/types'
+
+import {
+    DeLabScheme,
+    DeLabModalConfig,
+    DeLabButtonConfig
+} from './core/types/react'
 
 export { DeLabConnect, DeLabModal, DeLabButton }
 export type {
     DeLabEvent,
     DeLabNetwork,
-    DeLabScheme,
     DeLabTypeConnect,
     DeLabAddress,
     DeLabError,
     DeLabConnecting,
     DeLabTransaction,
-    DeLabModalConfig
+    DeLabScheme,
+    DeLabModalConfig,
+    DeLabButtonConfig
 }

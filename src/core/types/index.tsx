@@ -1,11 +1,8 @@
-import { DeLabConnect } from "index";
-
 type DeLabEvent = {
     data?: any;
 } & Event
 
 type DeLabNetwork = 'mainnet' | 'testnet'
-type DeLabScheme = 'dark' | 'light'
 type DeLabTypeConnect = 'tonhub' | 'toncoinwallet' | 'tonkeeper' | undefined
 type DeLabAddress = string | undefined
 
@@ -28,25 +25,13 @@ interface DeLabTransaction {
     text?: string, // Optional comment. If no payload specified -
     payload?: string // Optional serialized to base64 string payload cell
 }
-interface DeLabModalConfig {
-    DeLabConnectObject: DeLabConnect,
-    scheme: DeLabScheme
-}
-
-interface DeLabButtonConfig {
-    DeLabConnectObject: DeLabConnect,
-    scheme: DeLabScheme
-}
 
 export type {
     DeLabEvent,
     DeLabNetwork,
-    DeLabScheme,
     DeLabTypeConnect,
     DeLabAddress,
     DeLabError,
     DeLabConnecting,
-    DeLabTransaction,
-    DeLabModalConfig,
-    DeLabButtonConfig
+    DeLabTransaction
 }

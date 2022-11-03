@@ -20,10 +20,8 @@ import { QRCodeSVG } from 'qrcode.react'
 import React, { useEffect, useState } from 'react'
 import { Icon20ComputerOutline, Icon20SmartphoneOutline, Icon24Dismiss, Icon28ChevronLeftOutline } from '@vkontakte/icons'
 
-import {
-    DeLabModalConfig,
-    DeLabEvent
-} from './types'
+import { DeLabModalConfig } from './types/react'
+import { DeLabEvent } from './types/index'
 
 import '@vkontakte/vkui/dist/vkui.css'
 import './static/modal.css'
