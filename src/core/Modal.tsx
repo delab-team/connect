@@ -34,7 +34,7 @@ const tonkeeperLogo = 'https://ipfs.io/ipfs/bafkreia4powgq5jmqpgffbvxqlwjfecnafx
 const justonLogo = 'https://ipfs.io/ipfs/bafkreicsxkyeim2dtcffk7gnn37h3p5eidv65oj5vyfpei2qvh5q7rxuva'
 const toncoinwalletLogo = 'https://ipfs.io/ipfs/bafkreidzi6kpvacf67lb5n45gjhrx2jhv3fjmr4kl5zmeqw7ks3wemfuqe'
 const mytonwalletLogo = 'https://ipfs.io/ipfs/bafkreiaqubymrwvbj7pojsdze57ieyiqnr2h6ugz6bfiwatxoy5exxrxnu'
-const unitonLogo = 'https://ipfs.io/ipfs/bafkreiau7rwd6yozcqraur275phxn3k3t7rgrbjbd57fpksexnqjpadq64'
+const unitonLogo = 'https://ipfs.io/ipfs/bafkreickysl5sqig4r2qbna4mv7kd6eslpwrmq6w435f6rkiwqj7ujmexq'
 
 const DeLabModal: React.FC<DeLabModalConfig> = (props: DeLabModalConfig) => {
     const [ firstRender, setFirstRender ] = useState<boolean>(false)
