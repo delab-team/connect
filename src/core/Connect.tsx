@@ -77,10 +77,6 @@ class DeLabConnect {
                     this._network = DeLabConnect.getStorageData('network')
                     this._typeConnect = 'tonhub'
 
-                    this.newEvent('connected', this._address)
-                    this.newEvent('typeConnect', 'tonhub')
-                    this.newEvent('network', this._network)
-
                     this.connectTonHub()
                     break
 
@@ -89,20 +85,12 @@ class DeLabConnect {
                     this._address = DeLabConnect.getStorageData('address')
                     this._typeConnect = 'toncoinwallet'
 
-                    this.newEvent('connected', this._address)
-                    this.newEvent('typeConnect', this._typeConnect)
-                    this.newEvent('network', this._network)
-
                     this.connectToncoinWallet()
                     break
 
                 case 'tonkeeper':
                     this._address = DeLabConnect.getStorageData('address')
                     this._typeConnect = 'tonkeeper'
-
-                    this.newEvent('connected', this._address)
-                    this.newEvent('typeConnect', this._typeConnect)
-                    this.newEvent('network', this._network)
 
                     this.sussesConnect()
                     break
@@ -267,7 +255,7 @@ class DeLabConnect {
 
     public async connectTonHub (): Promise<DeLabAddress> {
         if (this._sessionTonHub) {
-            this.newEvent('link', this._sessionTonHub.link)
+            this.newEvent('link', this._sessionTonHub.link.replace('ton://', 'https://tonhub.com/'))
             const session: TonhubSessionAwaited = await this._connectorTonHub
                 .awaitSessionReady(this._sessionTonHub.id, 5 * 60 * 1000) // 5 min timeout
 

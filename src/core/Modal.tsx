@@ -176,7 +176,7 @@ const DeLabModal: React.FC<DeLabModalConfig> = (props: DeLabModalConfig) => {
                                                         />
                                                     </HorizontalCell>
 
-                                                    <HorizontalCell size="l" header="Uniton" disabled>
+                                                    <HorizontalCell size="l" header="Uniton" onClick={() => props.DeLabConnectObject.connectToncoinWallet()}>
                                                         <Avatar
                                                             size={60}
                                                             mode="app"
