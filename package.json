@@ -1,6 +1,6 @@
 {
     "name": "@delab-team/connect",
-    "version": "1.1.5",
+    "version": "1.2.0",
     "homepage": "https://connect-example.delab.team",
     "main": "./dist/index.js",
     "module": "./dist/index.js",
@@ -37,7 +37,7 @@
         "axios": "^0.27.2",
         "buffer": "^6.0.3",
         "crypto-browserify": "^3.12.0",
-        "qrcode.react": "^3.1.0",
+        "qr-code-styling": "^1.6.0-rc.1",
         "react-scripts": "5.0.1",
         "stream-browserify": "^3.0.0",
         "ton-x": "^2.0.0"

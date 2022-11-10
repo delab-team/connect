@@ -1,3 +1,15 @@
+[scheme=space_gray] {
+    --de_lab_background: rgba(0, 0, 0, 1);
+    --de_lab_color: #fff;
+    --de_lab_background_opacity: rgba(0, 0, 0, 0.3);
+    --de_lab_color_white: #fff;
+}
+[scheme=bright_light] {
+    --de_lab_background: rgba(255, 255, 255, 1);
+    --de_lab_color: #000;
+    --de_lab_background_opacity: rgba(255, 255, 255, 0.3);
+    --de_lab_color_white: #fff;
+}
 .delab-modal-root {
     /* display: none; */
     position: absolute;
@@ -7,9 +19,20 @@
     left: 0;
     z-index: -1;
     background-color: transparent;
-    backdrop-filter: blur(0);
+    /* backdrop-filter: blur(0); */
     transition: z-index, backdrop-filter, background-color 0.2s cubic-bezier(0, 0, 0.09, 1.9);
     transition-delay: 0.1s;
+}
+
+.delab-modal-root *:not(.vkuiButton, .vkuiButton__content) {
+    /* color: var(--de_lab_color); */
+}
+
+.delab-modal-root .vkuiButton__content {
+    color: var(--de_lab_background)
+}
+.delab-modal-root .Avatar {
+    color: transparent;
 }
 
 .delab-modal-root .vkuiModalRoot__mask {
@@ -18,32 +41,127 @@
 
 .delab-modal-root .ModalPage__in-wrap {
     transition: transform 0.2s cubic-bezier(0, 0, 0.09, 1.1);
-    transform: scale(0.1);
+    transform: scale(0.96);
+}
+
+.delab-modal-root .ModalPage__in-wrap:hover {
+    transform: scale(1);
+}
+
+.delab-modal-root .ModalPage__in {
+    min-height: 434px;
+    max-height: 454px;
+}
+
+.delab-modal-root .vkuiPanelHeader__before {
+    padding-right: 1px;
 }
 
 .delab-modal-root-active {
     /* display: block; */
     z-index: 10000;
-    -webkit-backdrop-filter: blur(5px); /* Use for Safari 9+, Edge 17+ (not a mistake) and iOS Safari 9.2+ */
-    backdrop-filter: blur(5px);
+    /* backdrop-filter: blur(5px); */
     transition-delay: 0s;
     /* background-color: rgba(0, 0, 0, 0.1); */
 }
-.delab-modal-root-active .vkuiModalRoot__mask {
-    background-color: rgba(0, 0, 0, 0.4)!important;
+.delab-modal-root-active {
+    background-color: rgba(0, 0, 0, 0.35)!important;
 }
 .delab-modal-root-active .ModalPage__in-wrap {
-    transform: scale(1);
+    /* transform: scale(1); */
     transition: transform 0.2s cubic-bezier(0, 0, 0.09, 1.4);
 }
 
+
+@keyframes img1 {
+    0% {
+        position: absolute;
+        top: 0px;
+    }
+
+    50% {
+        position: absolute;
+        top: -5px;
+    }
+  
+    100% {
+        position: absolute;
+        top: 0px;
+    }
+  }
+
+.delab-modal-root .vkuiHorizontalCell:hover .Avatar img {
+    transition: all 0.2s cubic-bezier(0, 0, 0.09, 1.4);
+    position: absolute;
+    animation: img1 0.2s 1 ease-in-out;
+}
+
+.delab-modal-root .vkuiHorizontalScroll {
+    margin-bottom: 20px;
+}
+
+.delab-modal-root .vkuiHorizontalCell__body {
+    padding-top: 5px;
+}
+
+.delab-modal-root .vkuiHorizontalCell__body[disabled] {
+    opacity: 0.5;
+}
+
+.delab-modal-root .vkuiModalPage--s .Avatar {
+    border-radius: 20px!important;
+}
+
+
+.delab-modal-root .vkuiModalPage__in {
+    border-radius: 30px!important;
+    opacity: 1!important;
+
+    background: var(--de_lab_background_opacity);
+    backdrop-filter: blur( 15px );
+    -webkit-backdrop-filter: blur( 15px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.5 );
+
+}
+
+body::after {
+    opacity: 0!important;
+ }
+
+.delab-modal-root .vkuiPanelHeader--ios.vkuiPanelHeader--no-after .vkuiPanelHeader__content>* {
+    display: flex;
+    align-items: center;
+}
+
+.delab-modal-root .vkuiModalPage--s .vkuiModalPage__in-wrap {
+    max-width: 360px!important;
+}
+
+.delab-modal-root .vkuiHorizontalCell__body {
+    width: 110px;
+    border-radius: 20px!important;
+}
+
+.delab-modal-root .vkuiSubhead--sizeY-compact {
+    text-align: center;
+}
+
+
 .delab_lern {
     border-radius: 100px;
-    background-color: rgb(194, 181, 45);
+    background-color:  var(--de_lab_color)!important;
 }
+.delab-modal-root .vkuiButton {
+    background-color:  var(--de_lab_color)!important;
+}
+.delab-modal-root .vkuiIconButton {
+    color:  var(--de_lab_color)!important;
+}
+
 .delab_text {
     font-size: 15px!important;
-    opacity: 0.4!important;
+    opacity: 0.6!important;
 }
 .delab_text  * {
     font-size: 15px!important;
@@ -55,27 +173,59 @@
 }
 
 .delab-logo {
-    width: 20px;
-    height: 20px;
-    margin-right: 6px;
+    width: 22px;
+    margin-right: 2px;
+}
+.delab-logo2 {
+    margin-right: 10px;
 }
 
 .delab-button {
-    
+    max-height: 44px;
+    background-color: var(--de_lab_color)!important;
+}
+
+.delab-modal-root .vkuiModalPage__content-in,
+.delab-modal-root .vkuiModalPage__content-in > div,
+.delab-modal-root .vkuiModalPage__content-in > div > div {
+    height: 100%;
+}
+
+.qr-delab {
+    border-radius: 20px;
+    background-color: #fff;
+    padding: 15px;
+}
+
+.qr-delab > div {
+    height: 200px;
+    image-rendering: pixelated;
+}
+
+.qr-delab svg image {
+    clip-path: inset(0% round 15px)
 }
 
 @media (max-width: 660px) {
-    .delab-modal-root,
-    .delab-modal-root-active .ModalPage__in-wrap,
-    .delab-modal-root .ModalPage__in-wrap,
-    .delab-modal-root-active {
-        /* transition: none!important;
-        transform: none!important; */
-        backdrop-filter: blur(0)!important;
-    }
     .vkuiModalPage__in-wrap,
     .vkuiModalPage--s .vkuiModalPage__in-wrap,
     .delab-modal-root-active .ModalPage__in-wrap {
         max-width: none!important;
+    }
+
+    .delab-modal-root .vkuiModalPage--s .vkuiModalPage__in-wrap {
+        max-width: none!important;
+    }
+    .delab-modal-root .vkuiModalRoot__viewport {
+        height: 500px;
+    }
+
+    .delab-modal-root h5 {
+        text-align: center;
+    }
+
+    .delab-modal-root .vkuiPanelHeader__content-in {
+        display: flex;
+        align-items: center;
     }
 }

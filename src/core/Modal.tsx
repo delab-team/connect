@@ -16,12 +16,14 @@ import {
     SimpleCell,
     WebviewType
 } from '@vkontakte/vkui'
-import { QRCodeSVG } from 'qrcode.react'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Icon20ComputerOutline, Icon20SmartphoneOutline, Icon24Dismiss, Icon28ChevronLeftOutline } from '@vkontakte/icons'
+import QRCodeStyling from 'qr-code-styling'
 
 import { DeLabModalConfig } from './types/react'
 import { DeLabEvent } from './types/index'
+
+import * as QRoptions from './qr.json'
 
 import '@vkontakte/vkui/dist/vkui.css'
 import './static/modal.css'
@@ -33,8 +35,11 @@ const tonhubLogo = 'https://ipfs.io/ipfs/bafkreidr3kjxine5hgjxq45ybgqep5vr7lh5kl
 const tonkeeperLogo = 'https://ipfs.io/ipfs/bafkreia4powgq5jmqpgffbvxqlwjfecnafx2qx4lfpywsloz3ikffnnmya'
 const justonLogo = 'https://ipfs.io/ipfs/bafkreicsxkyeim2dtcffk7gnn37h3p5eidv65oj5vyfpei2qvh5q7rxuva'
 const toncoinwalletLogo = 'https://ipfs.io/ipfs/bafkreidzi6kpvacf67lb5n45gjhrx2jhv3fjmr4kl5zmeqw7ks3wemfuqe'
-const mytonwalletLogo = 'https://ipfs.io/ipfs/bafkreiaqubymrwvbj7pojsdze57ieyiqnr2h6ugz6bfiwatxoy5exxrxnu'
+const mytonwalletLogo = 'https://ipfs.io/ipfs/bafkreieneuwnw2rphzuhqz42mz4biq3tzhu3ixnq25w65u267a6m7nwhta'
 const unitonLogo = 'https://ipfs.io/ipfs/bafkreickysl5sqig4r2qbna4mv7kd6eslpwrmq6w435f6rkiwqj7ujmexq'
+
+const options: any = QRoptions
+const qrCode = new QRCodeStyling(options)
 
 const DeLabModal: React.FC<DeLabModalConfig> = (props: DeLabModalConfig) => {
     const [ firstRender, setFirstRender ] = useState<boolean>(false)
@@ -44,6 +49,8 @@ const DeLabModal: React.FC<DeLabModalConfig> = (props: DeLabModalConfig) => {
     const [ activeModal, setActiveModal ] = useState<string | null>(null)
 
     const [ isOpenModal, setIsOpenModal ] = useState<boolean>(false)
+
+    const ref = useRef<HTMLDivElement | null>(null)
 
     const ConfigProviderFix: any = ConfigProvider
     const AdaptivityProviderFix: any = AdaptivityProvider
@@ -66,6 +73,12 @@ const DeLabModal: React.FC<DeLabModalConfig> = (props: DeLabModalConfig) => {
         props.DeLabConnectObject.on('link', (data: DeLabEvent) => {
             setLink(data.data ?? '')
             setType(1)
+
+            console.log('link', data.data)
+
+            const typeWallet = data.data.indexOf('tonhub') > -1
+
+            qrCode.update({ data: data.data, image: typeWallet ? tonhubLogo : tonkeeperLogo })
         })
 
         props.DeLabConnectObject.on('connected', () => {
@@ -82,6 +95,10 @@ const DeLabModal: React.FC<DeLabModalConfig> = (props: DeLabModalConfig) => {
         }
     }, [])
 
+    useEffect(() => {
+        qrCode.append(ref.current ?? undefined)
+    }, [ type ])
+
     return (
         <div className={'delab-modal-root ' + (isOpenModal ? 'delab-modal-root-active' : '')}>
             <ConfigProviderFix
@@ -94,6 +111,7 @@ const DeLabModal: React.FC<DeLabModalConfig> = (props: DeLabModalConfig) => {
                         <ModalRoot activeModal={activeModal}>
                             <ModalPage
                                 id="connect"
+                                settlingHeight={100}
                                 // style={{minHeight: '220px'}}
                                 onClose={() => props.DeLabConnectObject.closeModal()}
                                 header={<ModalPageHeader
@@ -108,7 +126,7 @@ const DeLabModal: React.FC<DeLabModalConfig> = (props: DeLabModalConfig) => {
                                             <Icon24Dismiss />
                                         </PanelHeaderButton>
                                     }
-                                ><img src={props.scheme === 'dark' ? white : black} className="delab-logo" />DeLab Connect</ModalPageHeader>}
+                                ><img src={props.scheme === 'dark' ? white : black} className="delab-logo delab-logo2" />DeLab Connect</ModalPageHeader>}
                             >
 
                                 <div>
@@ -117,7 +135,7 @@ const DeLabModal: React.FC<DeLabModalConfig> = (props: DeLabModalConfig) => {
                                             <SimpleCell
                                                 disabled
                                                 className="delab_text"
-                                                before={<Icon20SmartphoneOutline fill="var(--text_primary)" />}
+                                                before={<Icon20SmartphoneOutline fill="var(--de_lab_color)" />}
                                             >
                                         Mobile
                                             </SimpleCell>
@@ -153,7 +171,7 @@ const DeLabModal: React.FC<DeLabModalConfig> = (props: DeLabModalConfig) => {
                                             <SimpleCell
                                                 disabled
                                                 className="delab_text"
-                                                before={<Icon20ComputerOutline fill="var(--text_primary)" />}
+                                                before={<Icon20ComputerOutline fill="var(--de_lab_color)" />}
                                             >
                                                 Desktop
                                             </SimpleCell>
@@ -196,14 +214,14 @@ const DeLabModal: React.FC<DeLabModalConfig> = (props: DeLabModalConfig) => {
                                         </div>
                                         : null }
                                     {type === 1 && link !== ''
-                                        ? <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', minHeight: '220px' }}>
-                                            <div style={{ borderRadius: '20px', padding: '20px', background: '#fff', marginBottom: '20px' }}>
-                                                <QRCodeSVG value={link} width={200} height={200} />
+                                        ? <div style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center', flexDirection: 'column', minHeight: '220px' }}>
+                                            <div className="qr-delab">
+                                                <div ref={ref} />
                                             </div>
                                             {isDesktop
-                                                ? <Button target="_blank" href={link} stretched size="m">Open Wallet</Button>
+                                                ? <Button target="_blank" href={link} size="l">Open Wallet</Button>
                                                 : <Div style={{ width: '90%' }}>
-                                                    <Button target="_blank" href={link} stretched size="m">Open Wallet</Button>
+                                                    <Button target="_blank" href={link} stretched size="l">Open Wallet</Button>
                                                 </Div>
                                             }
 

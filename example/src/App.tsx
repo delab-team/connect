@@ -88,9 +88,25 @@ export const App: React.FC = () => {
     }, [])
 
     return (
-        <div style={{height: '100vh', background: '#161726', color: '#fff'}}>
+        <div style={{
+            height: '100vh', 
+            background: '#161726', 
+            color: '#fff',
+            backgroundRepeat: 'no-repeat',
+            backgroundImage: `url(https://ipfs.io/ipfs/bafybeiemkofqtjsvywfk53xthpv5dqwmpszrzvcaxf4ftfec6ixll5mi5a)`,
+            backgroundSize: `cover`
+            }}>
             <div style={{ display: 'flex', justifyContent: 'center'}}>
-                <div style={{ display: 'flex', justifyContent: 'center', width: '550px', paddingTop: '20px'}}>
+                <div style={{ 
+                    display: 'flex', 
+                    justifyContent: 'center', 
+                    width: '650px', 
+                    backgroundColor: isConnected ? '#00000059' : 'transparent',
+                    borderRadius: '20px',
+                    padding: '20px',
+                    marginTop: '20px',
+                    height: '80vh'
+                }}>
                     {!isConnected  ? 
                         <DeLabButton DeLabConnectObject={DeLabConnector} scheme={'dark'} /> 
                     : null }
