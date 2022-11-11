@@ -42,8 +42,8 @@ import {
 // DeLabConnect must be created outside of the React Component
 const DeLabConnector = new DeLabConnect('https://example.com', 'Example', 'mainnet')
 
-DeLabConnector.on('connect', (data: DeLabEvent) => {
-    const connectConfig: DeLabConnecting = data.data
+DeLabConnector.on('connect', (event: DeLabEvent) => {
+    const connectConfig: DeLabConnecting = event.data
     const trans: DeLabTransaction = {
         to: 'EQCkR1cGmnsE45N4K0otPl5EnxnRakmGqeJUNua5fkWhales',
         value: '1000000' // string value in nano-coins
