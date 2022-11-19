@@ -1,6 +1,6 @@
 {
     "name": "@delab-team/connect",
-    "version": "1.2.0",
+    "version": "1.2.1",
     "homepage": "https://connect-example.delab.team",
     "main": "./dist/index.js",
     "module": "./dist/index.js",
@@ -32,8 +32,6 @@
     },
     "dependencies": {
         "@vkontakte/icons": "^1.184.0",
-        "@vkontakte/vk-bridge": "^2.0.2",
-        "@vkontakte/vkui": "^4.33.1",
         "axios": "^0.27.2",
         "buffer": "^6.0.3",
         "crypto-browserify": "^3.12.0",
@@ -51,8 +49,6 @@
         "@typescript-eslint/eslint-plugin": "^5.20.0",
         "@typescript-eslint/parser": "^5.20.0",
         "@vkontakte/icons": "^1.184.0",
-        "@vkontakte/vk-bridge": "^2.0.2",
-        "@vkontakte/vkui": "^4.33.1",
         "assert": "^2.0.0",
         "buffer": "^6.0.3",
         "cross-env": "^7.0.3",

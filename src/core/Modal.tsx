@@ -1,21 +1,3 @@
-import {
-    AdaptivityProvider,
-    AppRoot,
-    Avatar,
-    Button,
-    ConfigProvider,
-    Div,
-    HorizontalCell,
-    HorizontalScroll,
-    IconButton,
-    IOS,
-    ModalPage,
-    ModalPageHeader,
-    ModalRoot,
-    PanelHeaderButton,
-    SimpleCell,
-    WebviewType
-} from '@vkontakte/vkui'
 import React, { useEffect, useRef, useState } from 'react'
 import { Icon20ComputerOutline, Icon20SmartphoneOutline, Icon24Dismiss, Icon28ChevronLeftOutline } from '@vkontakte/icons'
 import QRCodeStyling from 'qr-code-styling'
@@ -25,7 +7,6 @@ import { DeLabEvent } from './types/index'
 
 import * as QRoptions from './qr.json'
 
-import '@vkontakte/vkui/dist/vkui.css'
 import './static/modal.css'
 import './static/style.css'
 
@@ -46,23 +27,13 @@ const DeLabModal: React.FC<DeLabModalConfig> = (props: DeLabModalConfig) => {
     const [ type, setType ] = useState<number>(0)
     const [ link, setLink ] = useState<string>('')
 
-    const [ activeModal, setActiveModal ] = useState<string | null>(null)
-
     const [ isOpenModal, setIsOpenModal ] = useState<boolean>(false)
 
     const ref = useRef<HTMLDivElement | null>(null)
 
-    const ConfigProviderFix: any = ConfigProvider
-    const AdaptivityProviderFix: any = AdaptivityProvider
-
-    const isDesktop = window.innerWidth >= 600
-
     function registerListen () {
         props.DeLabConnectObject.on('modal', (data: DeLabEvent) => {
             setIsOpenModal(data.data ?? false)
-
-            setActiveModal(data.data ? 'connect' : null)
-            // console.log('modal', data.data)
 
             if (!data.data) {
                 setType(0)
@@ -92,6 +63,8 @@ const DeLabModal: React.FC<DeLabModalConfig> = (props: DeLabModalConfig) => {
         if (!firstRender) {
             setFirstRender(true)
             registerListen()
+
+            document.body.setAttribute('scheme', props.scheme)
         }
     }, [])
 
@@ -101,138 +74,120 @@ const DeLabModal: React.FC<DeLabModalConfig> = (props: DeLabModalConfig) => {
 
     return (
         <div className={'delab-modal-root ' + (isOpenModal ? 'delab-modal-root-active' : '')}>
-            <ConfigProviderFix
-                appearance={props.scheme}
-                webviewType={WebviewType.INTERNAL}
-                platform={IOS}
-            >
-                <AdaptivityProviderFix >
-                    <AppRoot>
-                        <ModalRoot activeModal={activeModal}>
-                            <ModalPage
-                                id="connect"
-                                settlingHeight={100}
-                                // style={{minHeight: '220px'}}
-                                onClose={() => props.DeLabConnectObject.closeModal()}
-                                header={<ModalPageHeader
-                                    before={type === 1
-                                        ? <IconButton onClick={() => {
-                                            setType(0)
-                                            setLink('')
-                                        }}><Icon28ChevronLeftOutline /></IconButton> : null}
-                                    after={ isDesktop
-                                        ? null : <PanelHeaderButton
-                                            onClick={() => props.DeLabConnectObject.closeModal()}>
-                                            <Icon24Dismiss />
-                                        </PanelHeaderButton>
-                                    }
-                                ><img src={props.scheme === 'dark' ? white : black} className="delab-logo delab-logo2" />DeLab Connect</ModalPageHeader>}
-                            >
+            <div className='delab-modal-block'>
+                <div className="delab-modal-header">
+                    <div
+                        className={'delab-modal-header-left' + (type === 0 ? ' delab-disable' : '') }
+                        onClick={() => {
+                            setType(0)
+                            setLink('')
+                        }}
+                    >
+                        <Icon28ChevronLeftOutline width={24} height={24} />
+                    </div>
+                    <div className="delab-modal-header-center">
+                        <img src={props.scheme === 'dark' ? white : black} className="delab-logo delab-logo2" />
+                        <span>DeLab Connect</span>
+                    </div>
+                    <div className="delab-modal-header-right" onClick={() => props.DeLabConnectObject.closeModal()}>
+                        <Icon24Dismiss />
+                    </div>
+                </div>
 
-                                <div>
-                                    {type === 0
-                                        ? <div>
-                                            <SimpleCell
-                                                disabled
-                                                className="delab_text"
-                                                before={<Icon20SmartphoneOutline fill="var(--de_lab_color)" />}
-                                            >
-                                        Mobile
-                                            </SimpleCell>
-                                            <HorizontalScroll showArrows={false}>
-                                                <div style={{ display: 'flex', justifyContent: 'center' }}>
-                                                    <HorizontalCell size="l" header="Tonhub" onClick={() => props.DeLabConnectObject.connectTonHub()}>
-                                                        <Avatar
-                                                            size={60}
-                                                            mode="app"
-                                                            src={tonhubLogo}
-                                                        />
-                                                    </HorizontalCell>
+                {type === 0
+                    ? <div className="delab-modal-content">
+                        <div className="delab-modal-text-icon delab_text">
+                            <Icon20SmartphoneOutline fill="var(--de_lab_color)" />
+                        Mobile
+                        </div>
 
-                                                    <HorizontalCell size="l" header="Tonkeeper" onClick={() => props.DeLabConnectObject.connectTonkeeper()}>
-                                                        <Avatar
-                                                            size={60}
-                                                            mode="app"
-                                                            src={tonkeeperLogo}
-                                                        />
-                                                    </HorizontalCell>
-
-                                                    <HorizontalCell size="l" header="JUSTON" disabled>
-                                                        <Avatar
-                                                            size={60}
-                                                            mode="app"
-                                                            src={justonLogo}
-                                                        />
-                                                    </HorizontalCell>
-
-                                                </div>
-                                            </HorizontalScroll>
-
-                                            <SimpleCell
-                                                disabled
-                                                className="delab_text"
-                                                before={<Icon20ComputerOutline fill="var(--de_lab_color)" />}
-                                            >
-                                                Desktop
-                                            </SimpleCell>
-
-                                            <HorizontalScroll showArrows={false}>
-                                                <div style={{ display: 'flex', justifyContent: 'center' }}>
-                                                    <HorizontalCell size="l" header="Ton Wallet" onClick={() => props.DeLabConnectObject.connectToncoinWallet()}>
-                                                        <Avatar
-                                                            size={60}
-                                                            mode="app"
-                                                            src={toncoinwalletLogo}
-                                                        />
-                                                    </HorizontalCell>
-
-                                                    <HorizontalCell size="l" header="MyTonWallet" onClick={() => props.DeLabConnectObject.connectToncoinWallet()}>
-                                                        <Avatar
-                                                            size={60}
-                                                            mode="app"
-                                                            src={mytonwalletLogo}
-                                                        />
-                                                    </HorizontalCell>
-
-                                                    <HorizontalCell size="l" header="Uniton" onClick={() => props.DeLabConnectObject.connectToncoinWallet()}>
-                                                        <Avatar
-                                                            size={60}
-                                                            mode="app"
-                                                            src={unitonLogo} />
-                                                    </HorizontalCell>
-
-                                                </div>
-                                            </HorizontalScroll>
-
-                                            <Div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                                <Button
-                                                    className="delab_lern"
-                                                    target="_blank"
-                                                    href="https://github.com/delab-team/connect"
-                                                >Learn More</Button>
-                                            </Div>
-                                        </div>
-                                        : null }
-                                    {type === 1 && link !== ''
-                                        ? <div style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center', flexDirection: 'column', minHeight: '220px' }}>
-                                            <div className="qr-delab">
-                                                <div ref={ref} />
-                                            </div>
-                                            {isDesktop
-                                                ? <Button target="_blank" href={link} size="l">Open Wallet</Button>
-                                                : <Div style={{ width: '90%' }}>
-                                                    <Button target="_blank" href={link} stretched size="l">Open Wallet</Button>
-                                                </Div>
-                                            }
-
-                                        </div>
-                                        : null}
+                        <div className="delab-modal-horizontal">
+                            <div className="delab-modal-horizontal-block" onClick={() => props.DeLabConnectObject.connectTonHub()}>
+                                <div className="delab-icon">
+                                    <img src={tonhubLogo} />
                                 </div>
-                            </ModalPage>
-                        </ModalRoot>
-                    </AppRoot>
-                </AdaptivityProviderFix>
-            </ConfigProviderFix>
+                                <span>
+                            Tonhub
+                                </span>
+                            </div>
+
+                            <div className="delab-modal-horizontal-block" onClick={() => props.DeLabConnectObject.connectTonkeeper()}>
+                                <div className="delab-icon">
+                                    <img src={tonkeeperLogo} />
+                                </div>
+                                <span>
+                            Tonkeeper
+                                </span>
+                            </div>
+
+                            <div className="delab-modal-horizontal-block delab-disalbe">
+                                <div className="delab-icon">
+                                    <img src={justonLogo} />
+                                </div>
+                                <span>
+                            JUSTON
+                                </span>
+                            </div>
+
+                        </div>
+
+                        <div className="delab-modal-text-icon delab_text">
+                            <Icon20ComputerOutline fill="var(--de_lab_color)" />
+                        Desktop
+                        </div>
+
+                        <div className="delab-modal-horizontal">
+
+                            <div className="delab-modal-horizontal-block" onClick={() => props.DeLabConnectObject.connectToncoinWallet()}>
+                                <div className="delab-icon">
+                                    <img src={toncoinwalletLogo} />
+                                </div>
+                                <span>
+                            Ton Wallet
+                                </span>
+                            </div>
+
+                            <div className="delab-modal-horizontal-block" onClick={() => props.DeLabConnectObject.connectToncoinWallet()}>
+                                <div className="delab-icon">
+                                    <img src={mytonwalletLogo} />
+                                </div>
+                                <span>
+                            MyTonWallet
+                                </span>
+                            </div>
+
+                            <div className="delab-modal-horizontal-block" onClick={() => props.DeLabConnectObject.connectToncoinWallet()}>
+                                <div className="delab-icon">
+                                    <img src={unitonLogo} />
+                                </div>
+                                <span>
+                            Uniton
+                                </span>
+                            </div>
+                        </div>
+
+                        <div className="delab-center-block">
+                            <a className='delab_lern'
+                                target="_blank"
+                                href="https://github.com/delab-team/connect"
+                            >
+                            Learn More
+                            </a>
+                        </div>
+                    </div>
+                    : <div className="delab-modal-content">
+                        <div className="delab-center-block2">
+                            <div className="qr-delab">
+                                <div ref={ref} />
+                            </div>
+                            <a className='delab-button' target="_blank" href={link}>
+                        Open Wallet
+                            </a>
+                        </div>
+
+                    </div>
+                }
+            </div>
         </div>
     )
 }

@@ -1,10 +1,17 @@
-[scheme=space_gray] {
+body {
+    --delab_radius_1: 32px;
+    --delab_radius_2: 24px;
+    --delab_radius_3: 18px;
+    --delab_radius_4: 13.5px;
+}
+
+[scheme=dark] {
     --de_lab_background: rgba(0, 0, 0, 1);
     --de_lab_color: #fff;
     --de_lab_background_opacity: rgba(0, 0, 0, 0.3);
     --de_lab_color_white: #fff;
 }
-[scheme=bright_light] {
+[scheme=light] {
     --de_lab_background: rgba(255, 255, 255, 1);
     --de_lab_color: #000;
     --de_lab_background_opacity: rgba(255, 255, 255, 0.3);
@@ -12,7 +19,7 @@
 }
 .delab-modal-root {
     /* display: none; */
-    position: absolute;
+    position: fixed;
     width: 100vw;
     height: 100vh;
     top: 0;
@@ -23,6 +30,200 @@
     transition: z-index, backdrop-filter, background-color 0.2s cubic-bezier(0, 0, 0.09, 1.9);
     transition-delay: 0.1s;
 }
+
+.delab-modal-block {
+    position: absolute;
+    top: calc(50% - 225px);
+    left: calc(50% - 180px);
+    border-radius: var(--delab_radius_1)!important;
+    padding: 6px 12px 12px;
+
+    background: var(--de_lab_background_opacity);
+    backdrop-filter: blur( 15px );
+    -webkit-backdrop-filter: blur( 15px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.5 );
+
+    width: 360px;
+    height: 434px;
+    box-sizing: border-box;
+    box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.2);
+
+    transition: transform 0.2s cubic-bezier(0, 0, 0.09, 1.1);
+    transform: scale(0.96);
+}
+
+.delab-modal-block:hover {
+    transform: scale(1);
+}
+
+.delab-modal-block * {
+    color:  var(--de_lab_color)!important;
+}
+
+.delab-modal-header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.delab-modal-header * {
+    font-weight: 500;
+    font-size: 20px;
+}
+
+.delab-modal-header-left.delab-disable{
+    padding: 10px;
+    box-sizing: border-box;
+    opacity: 0;
+}
+
+.delab-modal-header-left:not(.delab-disable) {
+    cursor: pointer;
+    transition: all .2s;
+    padding: 10px;
+    opacity: 1!important;
+    box-sizing: border-box;
+    border-radius: var(--delab_radius_4);
+}
+
+.delab-modal-header-center {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.delab-modal-header-right {
+    cursor: pointer;
+    transition: all .2s;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: var(--delab_radius_4);
+    
+}
+
+.delab-modal-header-right:hover,
+.delab-modal-header-left:not(.delab-disable):hover {
+    background-color: var(--de_lab_background_opacity);
+}
+
+.delab-modal-text-icon {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 28px;
+}
+
+.delab-modal-text-icon .Icon {
+    margin-right: 0px;
+}
+
+.delab-modal-content {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.delab-modal-horizontal {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    margin: 10px 0px 16px 0px;
+}
+
+.delab-modal-horizontal-block {
+    padding: 5px 10px;
+    border-radius: var(--delab_radius_3);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+
+    width: 105px;
+    height: 85px;
+
+    cursor: pointer;
+
+    background-color: transparent;
+
+    transition: background-color .2s;
+}
+
+.delab-modal-horizontal-block:hover {
+    background-color: var(--de_lab_background_opacity);
+}
+
+.delab-modal-horizontal-block.delab-disalbe {
+    opacity: 0.5!important;
+    cursor: default;
+}
+
+.delab-modal-horizontal-block .delab-icon {
+    border-radius: var(--delab_radius_3);
+    width: 60px;
+    height: 60px;
+    position: relative;
+    margin-bottom: 2px;
+}
+
+.delab-modal-horizontal-block .delab-icon img {
+    width: 60px;
+    height: 60px;
+    border-radius: var(--delab_radius_3);
+    position: absolute;
+    top: 0;
+}
+
+.delab-modal-horizontal-block span {
+    font-size: 13px;
+    opacity: .8;
+}
+
+.delab-modal-horizontal-block:hover img {
+    transition: all 0.2s cubic-bezier(0, 0, 0.09, 1.4);
+    animation: img1 0.2s 1 ease-in-out;
+}
+
+.delab-center-block {
+    margin: 18px 0px 0px 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.delab_lern {
+    color: var(--de_lab_background)!important;
+    text-decoration: none;
+    padding: 6px 16px;
+    box-sizing: border-box;
+    border-radius: var(--delab_radius_4);
+    background-color: var(--de_lab_color);
+    font-size: 13px;
+}
+
+.delab-center-block2 {
+    margin: 18px 0px 0px 0px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+    min-height: calc(434px - 90px);
+    height: 100%;
+}
+
+.delab-button {
+    color: var(--de_lab_background)!important;
+    text-decoration: none!important;
+    font-size: 14px;
+}
+
+.qr-delab {
+    min-width: 200px;
+}
+
+
 
 .delab-modal-root *:not(.vkuiButton, .vkuiButton__content) {
     /* color: var(--de_lab_color); */
@@ -148,10 +349,6 @@ body::after {
 }
 
 
-.delab_lern {
-    border-radius: 100px;
-    background-color:  var(--de_lab_color)!important;
-}
 .delab-modal-root .vkuiButton {
     background-color:  var(--de_lab_color)!important;
 }
@@ -173,7 +370,7 @@ body::after {
 }
 
 .delab-logo {
-    width: 22px;
+    width: 20px;
     margin-right: 2px;
 }
 .delab-logo2 {
@@ -183,6 +380,25 @@ body::after {
 .delab-button {
     max-height: 44px;
     background-color: var(--de_lab_color)!important;
+    padding: 12px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    box-sizing: border-box;
+    cursor: pointer;
+    transition: all .2s;
+}
+
+.delab-button:hover {
+    box-shadow: 1px 1px 20px rgba(39, 39, 39, 0.2);
+}
+
+.delab-button span {
+    color: var(--de_lab_background);
+}
+.delab-button img {
+    margin-right: 8px;
 }
 
 .delab-modal-root .vkuiModalPage__content-in,
@@ -227,5 +443,16 @@ body::after {
     .delab-modal-root .vkuiPanelHeader__content-in {
         display: flex;
         align-items: center;
+    }
+
+    .delab-modal-block {
+        top: auto;
+        left: auto;
+        bottom: -2px!important;
+        transform: scale(1)!important;
+        border-bottom-left-radius: 0px!important;
+        border-bottom-right-radius: 0px!important;
+        width: 100%;
+        overflow: hidden;
     }
 }

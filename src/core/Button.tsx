@@ -1,6 +1,4 @@
 import * as React from 'react'
-import { Button } from '@vkontakte/vkui'
-import '@vkontakte/vkui/dist/vkui.css'
 import './static/modal.css'
 import './static/style.css'
 
@@ -11,11 +9,10 @@ const black = 'https://ipfs.io/ipfs/bafkreibbn3nq6avodph3lcg6qlak6tbjha7levxzwgy
 
 export const DeLabButton = React.memo(
     (props: DeLabButtonConfig) => (
-        <Button onClick={() => props.DeLabConnectObject.openModal()} size="l" className="delab-button" before={
+        <div onClick={() => props.DeLabConnectObject.openModal()} className="delab-button">
             <img src={props.scheme === 'light' ? white : black} className="delab-logo" />
-        }>
-            DeLab Connect
-        </Button>
+            <span>DeLab Connect</span>
+        </div>
     )
 )
 
