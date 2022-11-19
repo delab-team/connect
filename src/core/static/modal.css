@@ -446,9 +446,13 @@ body::after {
     }
 
     .delab-modal-block {
+        --safe-area-inset-bottom: env(safe-area-inset-bottom);
         top: auto;
         left: auto;
-        bottom: -2px!important;
+        position: fixed;
+        /* padding-bottom: var(--safe-area-inset-bottom)!important; */
+        bottom: calc(var(--safe-area-inset-bottom) - 1px)!important;
+        /* bottom */
         transform: scale(1)!important;
         border-bottom-left-radius: 0px!important;
         border-bottom-right-radius: 0px!important;

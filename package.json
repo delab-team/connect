@@ -1,6 +1,6 @@
 {
     "name": "@delab-team/connect",
-    "version": "1.2.1",
+    "version": "1.2.2",
     "homepage": "https://connect-example.delab.team",
     "main": "./dist/index.js",
     "module": "./dist/index.js",

@@ -65,7 +65,7 @@ class DeLabConnect {
 
         this.loadWallet()
 
-        console.log('v: 1.2.1')
+        console.log('v: 1.2.2')
     }
 
     public loadWallet (): void {
