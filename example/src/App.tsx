@@ -12,7 +12,7 @@ import {
 } from '@delab-team/connect'
 import { QRCodeSVG } from 'qrcode.react'
 
-const DeLabConnector = new DeLabConnect('https://google.com', 'Test')
+const DeLabConnector = new DeLabConnect('https://google.com', 'Test', 'mainnet')
 
 export const App: React.FC = () => {
 
