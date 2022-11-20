@@ -64,7 +64,7 @@ const DeLabModal: React.FC<DeLabModalConfig> = (props: DeLabModalConfig) => {
             setFirstRender(true)
             registerListen()
 
-            document.body.setAttribute('scheme', props.scheme)
+            document.body.setAttribute('scheme', props.scheme === 'dark' ? 'space_gray' : 'bright_light')
         }
     }, [])
 
