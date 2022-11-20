@@ -5,13 +5,13 @@ body {
     --delab_radius_4: 13.5px;
 }
 
-[scheme=dark] {
+[scheme=space_gray] {
     --de_lab_background: rgba(0, 0, 0, 1);
     --de_lab_color: #fff;
     --de_lab_background_opacity: rgba(0, 0, 0, 0.3);
     --de_lab_color_white: #fff;
 }
-[scheme=light] {
+[scheme=bright_light] {
     --de_lab_background: rgba(255, 255, 255, 1);
     --de_lab_color: #000;
     --de_lab_background_opacity: rgba(255, 255, 255, 0.3);
