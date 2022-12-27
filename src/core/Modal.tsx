@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Icon20ComputerOutline, Icon20SmartphoneOutline, Icon24Dismiss, Icon28ChevronLeftOutline } from '@vkontakte/icons'
 import QRCodeStyling from 'qr-code-styling'
+import { WalletInfo } from '@tonconnect/sdk'
 
 import { DeLabModalConfig } from './types/react'
 import { DeLabEvent } from './types/index'
@@ -29,6 +30,8 @@ const DeLabModal: React.FC<DeLabModalConfig> = (props: DeLabModalConfig) => {
 
     const [ isOpenModal, setIsOpenModal ] = useState<boolean>(false)
 
+    const [ tonConnectWallets, setTonConnectWallets ] = useState<Array<WalletInfo>>([])
+
     const ref = useRef<HTMLDivElement | null>(null)
 
     function registerListen () {
@@ -49,7 +52,12 @@ const DeLabModal: React.FC<DeLabModalConfig> = (props: DeLabModalConfig) => {
 
             const typeWallet = data.data.indexOf('tonhub') > -1
 
-            qrCode.update({ data: data.data, image: typeWallet ? tonhubLogo : tonkeeperLogo })
+            // const tonconnectImg = props.DeLabConnectObject.tonConnectWallet?.imageUrl
+
+            qrCode.update({
+                data: data.data,
+                image: typeWallet ? tonhubLogo : tonkeeperLogo
+            })
         })
 
         props.DeLabConnectObject.on('connected', () => {
@@ -71,6 +79,10 @@ const DeLabModal: React.FC<DeLabModalConfig> = (props: DeLabModalConfig) => {
     useEffect(() => {
         qrCode.append(ref.current ?? undefined)
     }, [ type ])
+
+    useEffect(() => {
+        setTonConnectWallets(props.DeLabConnectObject.tonConnectWallets ?? [])
+    }, [ props.DeLabConnectObject.tonConnectWallets ])
 
     return (
         <div className={'delab-modal-root ' + (isOpenModal ? 'delab-modal-root-active' : '')}>
@@ -111,14 +123,21 @@ const DeLabModal: React.FC<DeLabModalConfig> = (props: DeLabModalConfig) => {
                                 </span>
                             </div>
 
-                            <div className="delab-modal-horizontal-block" onClick={() => props.DeLabConnectObject.connectTonkeeper()}>
-                                <div className="delab-icon">
-                                    <img src={tonkeeperLogo} />
+                            {tonConnectWallets.map((wallet: any, key) => (
+                                <div className="delab-modal-horizontal-block" key={key}
+                                    onClick={
+                                        () => props.DeLabConnectObject.connectTonkeeper(
+                                            wallet
+                                        )
+                                    }>
+                                    <div className="delab-icon">
+                                        <img src={wallet.imageUrl} />
+                                    </div>
+                                    <span>
+                                        {wallet.name}
+                                    </span>
                                 </div>
-                                <span>
-                            Tonkeeper
-                                </span>
-                            </div>
+                            ))}
 
                             <div className="delab-modal-horizontal-block delab-disalbe">
                                 <div className="delab-icon">

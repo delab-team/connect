@@ -22,7 +22,6 @@ yarn add @delab-team/connect
 possible types of event
 - `connect`
 - `disconnect`
-- `approve-link` (only with tonkeeper)
 - `error`
 - `error-transaction`
 - `error-toncoinwallet`
@@ -40,7 +39,11 @@ import {
 } from '@delab-team/connect'
 
 // DeLabConnect must be created outside of the React Component
-const DeLabConnector = new DeLabConnect('https://example.com', 'Example', 'mainnet')
+const DeLabConnector = new DeLabConnect('https://example.com', 'Example', 'mainnet', 'https://yourapp.com/tonconnect_manifest.json')
+// - URL your DApp
+// - Name your DApp
+// - network
+// - tonconnect-manifest (optional)
 
 DeLabConnector.on('connect', (data: DeLabEvent) => {
     const connectConfig: DeLabConnecting = data.data
@@ -49,10 +52,6 @@ DeLabConnector.on('connect', (data: DeLabEvent) => {
         value: '1000000' // string value in nano-coins
     }
     const data = await DeLabConnector.sendTransaction(trans)
-    if (connectConfig.typeConnect === 'tonkeeper') {
-        // display qrcode code ...
-        console.log('tonkeeper link: ', data)
-    }
 })
 
 DeLabConnector.on('disconnect', () => {

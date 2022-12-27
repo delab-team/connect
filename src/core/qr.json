@@ -1,13 +1,13 @@
 {
-    "width": 200,
-    "height": 200,
-    "margin": 0,
+    "width": 260,
+    "height": 260,
+    "margin": -3,
     "type": "svg",
     "qrOptions": {
     },
     "imageOptions": {
         "hideBackgroundDots": true,
-        "imageSize": 0.4,
+        "imageSize": 0.2,
         "margin": 3
     },
     "dotsOptions": {

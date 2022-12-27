@@ -220,7 +220,8 @@ body {
 }
 
 .qr-delab {
-    min-width: 200px;
+    min-width: 260px;
+    height: 260px;
 }
 
 
@@ -414,7 +415,7 @@ body::after {
 }
 
 .qr-delab > div {
-    height: 200px;
+    height: 260px;
     image-rendering: pixelated;
 }
 

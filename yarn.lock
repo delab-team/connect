@@ -1760,6 +1760,24 @@
     "@svgr/plugin-svgo" "^5.5.0"
     loader-utils "^2.0.0"
 
+"@tonconnect/protocol@^2.0.1":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@tonconnect/protocol/-/protocol-2.0.1.tgz#9f1675e95cc7a376a140cbbe95cf84b8ff4d78ea"
+  integrity sha512-jkSj6EKjIlHnJxrtxdlO7KqVJe41yrIgqamGZiqziKH6iwx0m9YyKvuIREd6CmWY2jbsev3BvBWqPp9KH6HrRw==
+  dependencies:
+    tweetnacl-util "^0.15.1"
+
+"@tonconnect/sdk@^2.0.4":
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/@tonconnect/sdk/-/sdk-2.0.4.tgz#1ab6d128789e349efca6dcacd6483133673e4f69"
+  integrity sha512-mG3vm0F6aNxAw5QNEeZ1MH0i3yWpGWxpZauFZTuy2wo2yKZscoAYYBlEF0AUwmdClW6n458EYrXFuC7Vy/a8FA==
+  dependencies:
+    "@tonconnect/protocol" "^2.0.1"
+    deepmerge "^4.2.2"
+    eventsource "^2.0.2"
+    node-fetch "^2.6.7"
+    tweetnacl "^1.0.3"
+
 "@tootallnate/once@1":
   version "1.1.2"
   resolved "https://registry.npmjs.org/@tootallnate/once/-/once-1.1.2.tgz"
@@ -4691,6 +4709,11 @@ events@^3.2.0, events@^3.3.0:
   resolved "https://registry.npmjs.org/events/-/events-3.3.0.tgz"
   integrity sha512-mQw+2fkQbALzQ7V0MY0IqdnXNOeTtP4r0lN9z7AAawCXgqea7bDii20AYrIBrFd/Hx0M2Ocz6S111CaFkUcb0Q==
 
+eventsource@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/eventsource/-/eventsource-2.0.2.tgz#76dfcc02930fb2ff339520b6d290da573a9e8508"
+  integrity sha512-IzUmBGPR3+oUG9dUeXynyNmf91/3zUSJg1lCktzKw47OXuhco54U3r9B7O4XX+Rb1Itm9OZ2b0RkTs10bICOxA==
+
 evp_bytestokey@^1.0.0, evp_bytestokey@^1.0.3:
   version "1.0.3"
   resolved "https://registry.npmjs.org/evp_bytestokey/-/evp_bytestokey-1.0.3.tgz"
@@ -7160,6 +7183,13 @@ no-case@^3.0.4:
   dependencies:
     lower-case "^2.0.2"
     tslib "^2.0.3"
+
+node-fetch@^2.6.7:
+  version "2.6.7"
+  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.7.tgz#24de9fba827e3b4ae44dc8b20256a379160052ad"
+  integrity sha512-ZjMPFEfVx5j+y2yF35Kzx5sF7kDzxuDj6ziH4FFbOp87zKDZNx8yExJIb05OGF4Nlt9IHFIMBkRl41VdvcNdbQ==
+  dependencies:
+    whatwg-url "^5.0.0"
 
 node-forge@^1:
   version "1.3.1"
@@ -9904,6 +9934,23 @@ ton@9.8.0:
     ton-crypto "2.1.0"
     tweetnacl "1.0.3"
 
+ton@^12.3.3:
+  version "12.3.3"
+  resolved "https://registry.yarnpkg.com/ton/-/ton-12.3.3.tgz#c43ae76855a01543194fa1d93695c812e1eda52d"
+  integrity sha512-5vwy7bwuUgOY7Injqi5Ei+Opsr9AjcS4qHzzdiUdt51O2W9oz4LE/GREXuv7Uvxsxev4cWXx0sic0ohfR8Yu4g==
+  dependencies:
+    axios "^0.25.0"
+    bn.js "5.2.0"
+    dataloader "^2.0.0"
+    ethjs-unit "0.1.6"
+    fp-ts "^2.11.1"
+    io-ts "^2.2.16"
+    io-ts-reporters "^2.0.0"
+    symbol.inspect "1.0.1"
+    teslabot "^1.3.0"
+    ton-crypto "2.1.0"
+    tweetnacl "1.0.3"
+
 tough-cookie@^4.0.0:
   version "4.1.2"
   resolved "https://registry.npmjs.org/tough-cookie/-/tough-cookie-4.1.2.tgz"
@@ -9927,6 +9974,11 @@ tr46@^2.1.0:
   integrity sha512-15Ih7phfcdP5YxqiB+iDtLoaTz4Nd35+IiAv0kQ5FNKHzXgdWqPoTIqEDDJmXceQt4JZk6lVPT8lnDlPpGDppw==
   dependencies:
     punycode "^2.1.1"
+
+tr46@~0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/tr46/-/tr46-0.0.3.tgz#8184fd347dac9cdc185992f3a6622e14b9d9ab6a"
+  integrity sha512-N3WMsuqV66lT30CrXNbEjx4GEwlow3v6rr4mCcv6prnfwhS01rkgyFdjPNBYd9br7LpXV1+Emh01fHnq2Gdgrw==
 
 traverse@^0.6.6:
   version "0.6.7"
@@ -9999,7 +10051,12 @@ tty-browserify@^0.0.1:
   resolved "https://registry.npmjs.org/tty-browserify/-/tty-browserify-0.0.1.tgz"
   integrity sha512-C3TaO7K81YvjCgQH9Q1S3R3P3BtN3RIM8n+OvX4il1K1zgE8ZhI0op7kClgkxtutIE8hQrcrHBXvIheqKUUCxw==
 
-tweetnacl@1.0.3:
+tweetnacl-util@^0.15.1:
+  version "0.15.1"
+  resolved "https://registry.yarnpkg.com/tweetnacl-util/-/tweetnacl-util-0.15.1.tgz#b80fcdb5c97bcc508be18c44a4be50f022eea00b"
+  integrity sha512-RKJBIj8lySrShN4w6i/BonWp2Z/uxwC3h4y7xsRrpP59ZboCd0GpEVsOnMDYLMmKBpYhb5TgHzZXy7wTfYFBRw==
+
+tweetnacl@1.0.3, tweetnacl@^1.0.3:
   version "1.0.3"
   resolved "https://registry.npmjs.org/tweetnacl/-/tweetnacl-1.0.3.tgz"
   integrity sha512-6rt+RN7aOi1nGMyC4Xa5DdYiukl2UWCbcJft7YhxReBGQD7OAM8Pbxw6YMo4r2diNEA8FEmu32YOn9rhaiE5yw==
@@ -10298,6 +10355,11 @@ wbuf@^1.1.0, wbuf@^1.7.3:
   dependencies:
     minimalistic-assert "^1.0.0"
 
+webidl-conversions@^3.0.0:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/webidl-conversions/-/webidl-conversions-3.0.1.tgz#24534275e2a7bc6be7bc86611cc16ae0a5654871"
+  integrity sha512-2JAn3z8AR6rjK8Sm8orRC0h/bcl/DqL7tRPdGZ4I1CjdF+EaMLmYxBHyXuKL849eucPFhvBoxMsflfOb8kxaeQ==
+
 webidl-conversions@^4.0.2:
   version "4.0.2"
   resolved "https://registry.npmjs.org/webidl-conversions/-/webidl-conversions-4.0.2.tgz"
@@ -10474,6 +10536,14 @@ whatwg-mimetype@^2.3.0:
   version "2.3.0"
   resolved "https://registry.npmjs.org/whatwg-mimetype/-/whatwg-mimetype-2.3.0.tgz"
   integrity sha512-M4yMwr6mAnQz76TbJm914+gPpB/nCwvZbJU28cUD6dR004SAxDLOOSUaB1JDRqLtaOV/vi0IC5lEAGFgrjGv/g==
+
+whatwg-url@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/whatwg-url/-/whatwg-url-5.0.0.tgz#966454e8765462e37644d3626f6742ce8b70965d"
+  integrity sha512-saE57nupxk6v3HY35+jzBwYa0rKSy0XR8JSxZPwgLr7ys0IBzhGviA1/TUGJLmSVqs8pb9AnvICXEuOHLprYTw==
+  dependencies:
+    tr46 "~0.0.3"
+    webidl-conversions "^3.0.0"
 
 whatwg-url@^7.0.0:
   version "7.1.0"
