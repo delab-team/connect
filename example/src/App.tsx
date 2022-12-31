@@ -29,8 +29,9 @@ export const App: React.FC = () => {
 
     async function sendTransaction () {
         const trans: DeLabTransaction = {
-            to: 'EQCkR1cGmnsE45N4K0otPl5EnxnRakmGqeJUNua5fkWhales',
-            value: '1000000'
+            to: 'EQAgfrO5OwCDzm30rcxC0o49BBhaPPdPQAW8BgEbewPLJhgk',
+            value: '100000000',
+            text: 'Test pay'
         }
         const dataTx2 = await DeLabConnector.sendTransaction(trans)
         setDataTx(dataTx2)
@@ -51,10 +52,6 @@ export const App: React.FC = () => {
             setTypeConnect(undefined)
             setNetwork('mainnet')
             console.log('disconect')
-        })
-
-        DeLabConnector.on('approve-link', (data: DeLabEvent) => {
-            setApproveLink(data.data ?? '')
         })
 
         DeLabConnector.on('error', (data: DeLabEvent) => {
@@ -116,7 +113,7 @@ export const App: React.FC = () => {
                         <p>isConnected: {isConnected ? 'Connected' : 'Disconnected'}</p>
                         <p>typeConnect: {typeConnect}</p>
                         <p>network: {network}</p>
-                        <p>address: {address}</p>
+                        <p>address: {address ? `${address.substr(0, 5)}...${address.substr(address.length - 5, address.length)}` : ``}</p>
                         <button onClick={() => DeLabConnector.disconnect()}>
                             Disconnect
                         </button>

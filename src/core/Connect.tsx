@@ -8,6 +8,9 @@ import {
     TonhubWalletConfig
 } from 'ton-x'
 
+import TonConnect, { Wallet, WalletInfo, WalletInfoInjected, WalletInfoRemote } from '@tonconnect/sdk'
+
+import { Address } from 'ton'
 import {
     DeLabNetwork,
     DeLabTypeConnect,
@@ -16,22 +19,10 @@ import {
     DeLabTransaction
 } from './types'
 
-const axios = require('axios').default
-
 declare global {
     interface Window { ton: any; }
 }
-
-function getRandomArbitrary (min: number, max: number) {
-    return Math.floor(Math.random() * (max - min + 1)) + min
-}
-
-// eslint-disable-next-line no-promise-executor-return
-const sleep = (ms: number) => new Promise(r => setTimeout(r, ms))
-
 class DeLabConnect {
-    private _hostName: string
-
     private _appUrl: string
 
     private _appName: string
@@ -41,6 +32,12 @@ class DeLabConnect {
     private _network: DeLabNetwork
 
     private _connectorTonHub: TonhubConnector
+
+    private _connectorTonConnect: TonConnect
+
+    private _tonConnectWallets: Array<WalletInfo>
+
+    private _tonConnectWallet: WalletInfo | undefined
 
     private _sessionTonHub: TonhubCreatedSession | undefined
 
@@ -54,18 +51,47 @@ class DeLabConnect {
 
     private _isOpenModal: boolean = false
 
-    constructor (appUrl: string, appName: string, network: DeLabNetwork = 'mainnet', hostNameTonkeeper: string = 'tonkeeper-conn.delab.team') {
+    constructor (
+        appUrl: string,
+        appName: string,
+        network: DeLabNetwork = 'mainnet',
+        manifestUrl: string = 'https://ipfs.io/ipfs/bafkreib7l74fuh7gmmmnwjoy3j4si74tdwgegw6gabuebfskolipuuia6i'
+    ) {
         this._appUrl = appUrl
         this._appName = appName
         this._network = network
 
-        this._hostName = hostNameTonkeeper
+        // this._hostName = hostNameTonkeeper
+        this._tonConnectWallets = []
 
         this._connectorTonHub = new TonhubConnector({ network: network === 'mainnet' ? 'mainnet' : 'sandbox' })
+        this._connectorTonConnect = new TonConnect({ manifestUrl })
+
+        this._connectorTonConnect.restoreConnection()
+
+        this._connectorTonConnect.onStatusChange(
+            (walletInfo) => {
+                console.log(walletInfo)
+                if (this._connectorTonConnect.connected && walletInfo) {
+                    this._address =  Address.parseRaw(
+                        walletInfo.account.address
+                    ).toFriendly()
+                    this._typeConnect = 'tonkeeper'
+
+                    DeLabConnect.addStorageData('init',  true)
+                    DeLabConnect.addStorageData('type-connect',  this._typeConnect)
+                    DeLabConnect.addStorageData('address',  this._address)
+                    DeLabConnect.addStorageData('network',  this._network)
+
+                    this.sussesConnect()
+                    this.closeModal()
+                }
+            }
+        )
 
         this.loadWallet()
 
-        console.log('v: 1.2.4')
+        console.log('v: 1.3.0')
     }
 
     public loadWallet (): void {
@@ -158,6 +184,21 @@ class DeLabConnect {
         console.log(sessionCreated)
     }
 
+    public async createTonConnect (): Promise<void> {
+        const walletsList = await this._connectorTonConnect.getWallets()
+        this._tonConnectWallets = walletsList
+
+        const tonkeeperKey: any = walletsList[0]
+
+        if (tonkeeperKey.embedded) {
+            console.log('embedded', tonkeeperKey.jsBridgeKey)
+            this._connectorTonConnect.connect(
+                { jsBridgeKey: tonkeeperKey.jsBridgeKey }
+            )
+        }
+        console.log(this._tonConnectWallets)
+    }
+
     private async sendTransactionTonHub (transaction: DeLabTransaction): Promise<any> {
         if (this._sessionTonHub && this._walletTonHub) {
             const request: TonhubTransactionRequest = {
@@ -206,34 +247,6 @@ class DeLabConnect {
         return singTon
     }
 
-    private async getHashServer (id: string) {
-        const hashData = await axios.get(`https://${this._hostName}/getAddress/${id}`)
-        if (hashData.data !== '') {
-            console.log('server -> ', hashData.data)
-            return hashData.data
-        }
-        return null
-    }
-
-    private async interval (id: string): Promise<undefined | any> {
-        let returnData = null
-        let count = 0
-        while (true) {
-            /* eslint-disable no-await-in-loop */
-            count += 1
-            if (count === 100) {
-                return undefined
-            }
-            const obDat = await this.getHashServer(id)
-            if (obDat) {
-                returnData = obDat
-                return returnData
-            }
-            await sleep(2000)
-            /* eslint-enable no-await-in-loop */
-        }
-    }
-
     private sussesConnect () {
         const sendData: DeLabConnecting = {
             address: this._address,
@@ -244,15 +257,28 @@ class DeLabConnect {
         this.newEvent('connect', sendData)
     }
 
-    private sendTransactionTonkeeper (transaction: DeLabTransaction): string {
-        let url = `https://app.tonkeeper.com/transfer/${transaction.to}?amount=${transaction.value}`
+    private async sendTransactionTonkeeper (transaction: DeLabTransaction): Promise<any> {
+        try {
+            const transactionTon = {
+                validUntil: Date.now() + 1000000,
+                messages: [
+                    {
+                        address: Address.parseFriendly(transaction.to).address.toString(),
+                        amount: transaction.value,
+                        stateInit: transaction.stateInit,
+                        payload: transaction.payload,
+                        text: transaction.text
+                    }
+                ]
+            }
 
-        if (transaction.text) url += `&text=${transaction.text}`
-        if (transaction.payload) url += `&bin=${transaction.payload}`
-        if (transaction.stateInit) url += `&init=${transaction.stateInit}`
-
-        this.newEvent('approve-link', url)
-        return url
+            const result = await this._connectorTonConnect.sendTransaction(transactionTon)
+            return result
+        } catch (error) {
+            console.error(error)
+            this.newEvent('error-transaction', { error })
+            return { error: 'transaction', data: error }
+        }
     }
 
     public async connectTonHub (): Promise<DeLabAddress> {
@@ -336,28 +362,21 @@ class DeLabConnect {
         return undefined
     }
 
-    public async connectTonkeeper (): Promise<DeLabAddress> {
-        const host = this._hostName
-        const userId = getRandomArbitrary(10000, 99999999)
-        const link = 'https://app.tonkeeper.com/ton-login/' + host + '/authRequest/' + userId
-
-        this.newEvent('link', link)
-
-        const address = await this.interval(`${userId}`)
-        if (address) {
-            console.log(address)
-            this._address = address
-            this._typeConnect = 'tonkeeper'
-
-            DeLabConnect.addStorageData('init',  true)
-            DeLabConnect.addStorageData('type-connect',  this._typeConnect)
-            DeLabConnect.addStorageData('address',  this._address)
-            DeLabConnect.addStorageData('network',  this._network)
-
-            this.sussesConnect()
-            this.closeModal()
-            return this._address
+    public async connectTonkeeper
+    (wallet: WalletInfoRemote): Promise<DeLabAddress> {
+        const walletConnectionSource = {
+            universalLink: wallet.universalLink,
+            bridgeUrl: wallet.bridgeUrl
         }
+
+        const universalLink = this._connectorTonConnect.connect(
+            walletConnectionSource
+        )
+        console.log(universalLink)
+
+        this._tonConnectWallet = wallet
+
+        this.newEvent('link', universalLink)
         return undefined
     }
 
@@ -392,6 +411,8 @@ class DeLabConnect {
         this._address = undefined
         this._balance = undefined
 
+        this._connectorTonConnect.disconnect()
+
         this.clearStorage()
 
         this.newEvent('disconnect', true)
@@ -407,7 +428,10 @@ class DeLabConnect {
 
     public async openModal (): Promise<boolean> {
         this._isOpenModal = true
+        // this.newEvent('modal', this._isOpenModal)
+        await this.createTonConnect()
         this.newEvent('modal', this._isOpenModal)
+
         await this.createTonHub()
         return true
     }
@@ -446,6 +470,18 @@ class DeLabConnect {
 
     public get walletTonHub (): TonhubWalletConfig | undefined {
         return this._walletTonHub
+    }
+
+    public get tonConnectWallets (): Array<WalletInfo> | undefined {
+        return this._tonConnectWallets
+    }
+
+    public get connectorTonConnect (): TonConnect | undefined {
+        return this._connectorTonConnect
+    }
+
+    public get tonConnectWallet (): WalletInfo | undefined {
+        return this._tonConnectWallet
     }
 }
 
