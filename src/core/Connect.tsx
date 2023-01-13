@@ -8,7 +8,7 @@ import {
     TonhubWalletConfig
 } from 'ton-x'
 
-import TonConnect, { Wallet, WalletInfo, WalletInfoInjected, WalletInfoRemote } from '@tonconnect/sdk'
+import TonConnect, { WalletInfo, WalletInfoRemote } from '@tonconnect/sdk'
 
 import { Address } from 'ton'
 import {
@@ -55,7 +55,7 @@ class DeLabConnect {
         appUrl: string,
         appName: string,
         network: DeLabNetwork = 'mainnet',
-        manifestUrl: string = 'https://ipfs.io/ipfs/bafkreib7l74fuh7gmmmnwjoy3j4si74tdwgegw6gabuebfskolipuuia6i'
+        manifestUrl: string = 'https://ipfs.filebase.io/ipfs/bafkreib7l74fuh7gmmmnwjoy3j4si74tdwgegw6gabuebfskolipuuia6i'
     ) {
         this._appUrl = appUrl
         this._appName = appName

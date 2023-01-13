@@ -11,14 +11,14 @@ import * as QRoptions from './qr.json'
 import './static/modal.css'
 import './static/style.css'
 
-const white = 'https://ipfs.io/ipfs/bafkreigpmboyvo43fa4ybalflby3pb3eg2emgzn7axkgd7rmvrgdpx4oja'
-const black = 'https://ipfs.io/ipfs/bafkreibbn3nq6avodph3lcg6qlak6tbjha7levxzwgyk7nyrwot3ajvuwq'
-const tonhubLogo = 'https://ipfs.io/ipfs/bafkreidr3kjxine5hgjxq45ybgqep5vr7lh5kldhyjbzvhh2hd2ukyuae4'
-const tonkeeperLogo = 'https://ipfs.io/ipfs/bafkreia4powgq5jmqpgffbvxqlwjfecnafx2qx4lfpywsloz3ikffnnmya'
-const justonLogo = 'https://ipfs.io/ipfs/bafkreicsxkyeim2dtcffk7gnn37h3p5eidv65oj5vyfpei2qvh5q7rxuva'
-const toncoinwalletLogo = 'https://ipfs.io/ipfs/bafkreidzi6kpvacf67lb5n45gjhrx2jhv3fjmr4kl5zmeqw7ks3wemfuqe'
-const mytonwalletLogo = 'https://ipfs.io/ipfs/bafkreieneuwnw2rphzuhqz42mz4biq3tzhu3ixnq25w65u267a6m7nwhta'
-const unitonLogo = 'https://ipfs.io/ipfs/bafkreickysl5sqig4r2qbna4mv7kd6eslpwrmq6w435f6rkiwqj7ujmexq'
+const white = 'https://ipfs.filebase.io/ipfs/bafkreigpmboyvo43fa4ybalflby3pb3eg2emgzn7axkgd7rmvrgdpx4oja'
+const black = 'https://ipfs.filebase.io/ipfs/bafkreibbn3nq6avodph3lcg6qlak6tbjha7levxzwgyk7nyrwot3ajvuwq'
+const tonhubLogo = 'https://ipfs.filebase.io/ipfs/bafkreidr3kjxine5hgjxq45ybgqep5vr7lh5kldhyjbzvhh2hd2ukyuae4'
+const tonkeeperLogo = 'https://ipfs.filebase.io/ipfs/bafkreia4powgq5jmqpgffbvxqlwjfecnafx2qx4lfpywsloz3ikffnnmya'
+const justonLogo = 'https://ipfs.filebase.io/ipfs/bafkreicsxkyeim2dtcffk7gnn37h3p5eidv65oj5vyfpei2qvh5q7rxuva'
+const toncoinwalletLogo = 'https://ipfs.filebase.io/ipfs/bafkreidzi6kpvacf67lb5n45gjhrx2jhv3fjmr4kl5zmeqw7ks3wemfuqe'
+const mytonwalletLogo = 'https://ipfs.filebase.io/ipfs/bafkreieneuwnw2rphzuhqz42mz4biq3tzhu3ixnq25w65u267a6m7nwhta'
+const unitonLogo = 'https://ipfs.filebase.io/ipfs/bafkreickysl5sqig4r2qbna4mv7kd6eslpwrmq6w435f6rkiwqj7ujmexq'
 
 const options: any = QRoptions
 const qrCode = new QRCodeStyling(options)
