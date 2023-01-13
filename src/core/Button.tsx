@@ -4,8 +4,8 @@ import './static/style.css'
 
 import { DeLabButtonConfig } from './types/react'
 
-const white = 'https://ipfs.io/ipfs/bafkreigpmboyvo43fa4ybalflby3pb3eg2emgzn7axkgd7rmvrgdpx4oja'
-const black = 'https://ipfs.io/ipfs/bafkreibbn3nq6avodph3lcg6qlak6tbjha7levxzwgyk7nyrwot3ajvuwq'
+const white = 'https://ipfs.filebase.io/ipfs/bafkreigpmboyvo43fa4ybalflby3pb3eg2emgzn7axkgd7rmvrgdpx4oja'
+const black = 'https://ipfs.filebase.io/ipfs/bafkreibbn3nq6avodph3lcg6qlak6tbjha7levxzwgyk7nyrwot3ajvuwq'
 
 export const DeLabButton = React.memo(
     (props: DeLabButtonConfig) => (
