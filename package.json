@@ -1,6 +1,6 @@
 {
     "name": "@delab-team/connect",
-    "version": "1.3.2",
+    "version": "1.4.0",
     "homepage": "https://connect-example.delab.team",
     "main": "./dist/index.js",
     "module": "./dist/index.js",
@@ -31,7 +31,7 @@
         ]
     },
     "dependencies": {
-        "@tonconnect/sdk": "^2.0.4",
+        "@tonconnect/sdk": "^2.0.7",
         "@vkontakte/icons": "^1.184.0",
         "buffer": "^6.0.3",
         "crypto-browserify": "^3.12.0",
@@ -39,7 +39,7 @@
         "react-scripts": "5.0.1",
         "stream-browserify": "^3.0.0",
         "ton": "^12.3.3",
-        "ton-x": "^2.0.0"
+        "ton-x": "^2.1.0"
     },
     "devDependencies": {
         "@types/node": "^18.7.6",

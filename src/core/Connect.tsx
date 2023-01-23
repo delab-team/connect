@@ -8,7 +8,7 @@ import {
     TonhubWalletConfig
 } from 'ton-x'
 
-import TonConnect, { WalletInfo, WalletInfoRemote } from '@tonconnect/sdk'
+import TonConnect, { WalletConnectionSource, WalletInfo, WalletInfoRemote } from '@tonconnect/sdk'
 
 import { Address } from 'ton'
 import {
@@ -64,7 +64,7 @@ class DeLabConnect {
         // this._hostName = hostNameTonkeeper
         this._tonConnectWallets = []
 
-        this._connectorTonHub = new TonhubConnector({ network: network === 'mainnet' ? 'mainnet' : 'sandbox' })
+        this._connectorTonHub = new TonhubConnector({ network })
         this._connectorTonConnect = new TonConnect({ manifestUrl })
 
         this._connectorTonConnect.restoreConnection()
@@ -91,7 +91,7 @@ class DeLabConnect {
 
         this.loadWallet()
 
-        console.log('v: 1.3.2')
+        console.log('v: 1.4.0')
     }
 
     public loadWallet (): void {
@@ -364,19 +364,24 @@ class DeLabConnect {
 
     public async connectTonkeeper
     (wallet: WalletInfoRemote): Promise<DeLabAddress> {
-        const walletConnectionSource = {
-            universalLink: wallet.universalLink,
-            bridgeUrl: wallet.bridgeUrl
+        let walletConnectionSource: WalletConnectionSource
+        if (wallet.universalLink) {
+            walletConnectionSource = {
+                universalLink: wallet.universalLink,
+                bridgeUrl: wallet.bridgeUrl
+            }
+        } else {
+            walletConnectionSource = { jsBridgeKey: wallet.name.toLocaleLowerCase() }
         }
 
         const universalLink = this._connectorTonConnect.connect(
             walletConnectionSource
         )
-        console.log(universalLink)
+        // console.log(universalLink)
 
         this._tonConnectWallet = wallet
 
-        this.newEvent('link', universalLink)
+        if (universalLink) this.newEvent('link', universalLink)
         return undefined
     }
 

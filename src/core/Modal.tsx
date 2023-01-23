@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { Icon20ComputerOutline, Icon20SmartphoneOutline, Icon24Dismiss, Icon28ChevronLeftOutline } from '@vkontakte/icons'
+import { Icon24Dismiss, Icon28ChevronLeftOutline } from '@vkontakte/icons'
 import QRCodeStyling from 'qr-code-styling'
 import { WalletInfo } from '@tonconnect/sdk'
 
@@ -15,10 +15,7 @@ const white = 'https://ipfs.filebase.io/ipfs/bafkreigpmboyvo43fa4ybalflby3pb3eg2
 const black = 'https://ipfs.filebase.io/ipfs/bafkreibbn3nq6avodph3lcg6qlak6tbjha7levxzwgyk7nyrwot3ajvuwq'
 const tonhubLogo = 'https://ipfs.filebase.io/ipfs/bafkreidr3kjxine5hgjxq45ybgqep5vr7lh5kldhyjbzvhh2hd2ukyuae4'
 const tonkeeperLogo = 'https://ipfs.filebase.io/ipfs/bafkreia4powgq5jmqpgffbvxqlwjfecnafx2qx4lfpywsloz3ikffnnmya'
-const justonLogo = 'https://ipfs.filebase.io/ipfs/bafkreicsxkyeim2dtcffk7gnn37h3p5eidv65oj5vyfpei2qvh5q7rxuva'
 const toncoinwalletLogo = 'https://ipfs.filebase.io/ipfs/bafkreidzi6kpvacf67lb5n45gjhrx2jhv3fjmr4kl5zmeqw7ks3wemfuqe'
-const mytonwalletLogo = 'https://ipfs.filebase.io/ipfs/bafkreieneuwnw2rphzuhqz42mz4biq3tzhu3ixnq25w65u267a6m7nwhta'
-const unitonLogo = 'https://ipfs.filebase.io/ipfs/bafkreickysl5sqig4r2qbna4mv7kd6eslpwrmq6w435f6rkiwqj7ujmexq'
 
 const options: any = QRoptions
 const qrCode = new QRCodeStyling(options)
@@ -32,7 +29,16 @@ const DeLabModal: React.FC<DeLabModalConfig> = (props: DeLabModalConfig) => {
 
     const [ tonConnectWallets, setTonConnectWallets ] = useState<Array<WalletInfo>>([])
 
+    const isDesktop = window.innerWidth >= 1000
+
     const ref = useRef<HTMLDivElement | null>(null)
+
+    function openLink (url: string) {
+        const link2 = document.createElement('a')
+        link2.href = url
+        link2.target = '_blank'
+        link2.click()
+    }
 
     function registerListen () {
         props.DeLabConnectObject.on('modal', (data: DeLabEvent) => {
@@ -51,6 +57,7 @@ const DeLabModal: React.FC<DeLabModalConfig> = (props: DeLabModalConfig) => {
             console.log('link', data.data)
 
             const typeWallet = data.data.indexOf('tonhub') > -1
+            if (!isDesktop) openLink(data.data)
 
             // const tonconnectImg = props.DeLabConnectObject.tonConnectWallet?.imageUrl
 
@@ -99,7 +106,8 @@ const DeLabModal: React.FC<DeLabModalConfig> = (props: DeLabModalConfig) => {
                     </div>
                     <div className="delab-modal-header-center">
                         <img src={props.scheme === 'dark' ? white : black} className="delab-logo delab-logo2" />
-                        <span>DeLab Connect</span>
+                        <a target="_blank"
+                            href="https://delab.team">  <span>DeLab Connect</span></a>
                     </div>
                     <div className="delab-modal-header-right" onClick={() => props.DeLabConnectObject.closeModal()}>
                         <Icon24Dismiss />
@@ -108,10 +116,6 @@ const DeLabModal: React.FC<DeLabModalConfig> = (props: DeLabModalConfig) => {
 
                 {type === 0
                     ? <div className="delab-modal-content">
-                        <div className="delab-modal-text-icon delab_text">
-                            <Icon20SmartphoneOutline fill="var(--de_lab_color)" />
-                        Mobile
-                        </div>
 
                         <div className="delab-modal-horizontal">
                             <div className="delab-modal-horizontal-block" onClick={() => props.DeLabConnectObject.connectTonHub()}>
@@ -123,88 +127,65 @@ const DeLabModal: React.FC<DeLabModalConfig> = (props: DeLabModalConfig) => {
                                 </span>
                             </div>
 
-                            {tonConnectWallets.map((wallet: any, key) => (
-                                <div className="delab-modal-horizontal-block" key={key}
-                                    onClick={
-                                        () => props.DeLabConnectObject.connectTonkeeper(
-                                            wallet
-                                        )
-                                    }>
-                                    <div className="delab-icon">
-                                        <img src={wallet.imageUrl} />
-                                    </div>
-                                    <span>
-                                        {wallet.name}
-                                    </span>
-                                </div>
-                            ))}
-
-                            <div className="delab-modal-horizontal-block delab-disalbe">
+                            <div className="delab-modal-horizontal-block" onClick={() => setType(2)}>
                                 <div className="delab-icon">
-                                    <img src={justonLogo} />
+                                    <img src={tonkeeperLogo} />
                                 </div>
                                 <span>
-                            JUSTON
+                            Ton Connect 2.0
                                 </span>
                             </div>
-
-                        </div>
-
-                        <div className="delab-modal-text-icon delab_text">
-                            <Icon20ComputerOutline fill="var(--de_lab_color)" />
-                        Desktop
-                        </div>
-
-                        <div className="delab-modal-horizontal">
 
                             <div className="delab-modal-horizontal-block" onClick={() => props.DeLabConnectObject.connectToncoinWallet()}>
                                 <div className="delab-icon">
                                     <img src={toncoinwalletLogo} />
                                 </div>
                                 <span>
-                            Ton Wallet
+                            Web Ton Wallets
                                 </span>
                             </div>
 
-                            <div className="delab-modal-horizontal-block" onClick={() => props.DeLabConnectObject.connectToncoinWallet()}>
-                                <div className="delab-icon">
-                                    <img src={mytonwalletLogo} />
-                                </div>
-                                <span>
-                            MyTonWallet
-                                </span>
-                            </div>
-
-                            <div className="delab-modal-horizontal-block" onClick={() => props.DeLabConnectObject.connectToncoinWallet()}>
-                                <div className="delab-icon">
-                                    <img src={unitonLogo} />
-                                </div>
-                                <span>
-                            Uniton
-                                </span>
-                            </div>
-                        </div>
-
-                        <div className="delab-center-block">
-                            <a className='delab_lern'
-                                target="_blank"
-                                href="https://github.com/delab-team/connect"
-                            >
-                            Learn More
-                            </a>
                         </div>
                     </div>
-                    : <div className="delab-modal-content">
-                        <div className="delab-center-block2">
+                    : null }
+                {type === 2
+                    ? <div className="delab-modal-content">
+                        <div className="delab-modal-text-icon delab_text">
+                        Ton Connect 2.0
+                        </div>
+
+                        {tonConnectWallets.map((wallet: any, key) => (
+                            <div className="delab-modal-horizontal-block" key={key}
+                                onClick={
+                                    () => props.DeLabConnectObject.connectTonkeeper(
+                                        wallet
+                                    )
+                                }>
+                                <div className="delab-icon">
+                                    <img src={wallet.imageUrl} />
+                                </div>
+                                <span>
+                                    {wallet.name}
+                                </span>
+                            </div>
+                        ))}
+                    </div>
+                    : null
+                }
+                {type === 1 ? <div className="delab-modal-content">
+                    <div className="delab-center-block2">
+                        {isDesktop ? <a target="_blank" href={link}>
                             <div className="qr-delab">
                                 <div ref={ref} />
-                            </div>
-                            <a className='delab-button' target="_blank" href={link}>
+                            </div></a>
+                            : <a className='delab-button delab-button-large' target="_blank" href={link}>
                         Open Wallet
                             </a>
-                        </div>
-
+                        }
                     </div>
+
+                </div>
+                    : null
                 }
             </div>
         </div>

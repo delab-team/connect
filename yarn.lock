@@ -1767,10 +1767,10 @@
   dependencies:
     tweetnacl-util "^0.15.1"
 
-"@tonconnect/sdk@^2.0.4":
-  version "2.0.4"
-  resolved "https://registry.yarnpkg.com/@tonconnect/sdk/-/sdk-2.0.4.tgz#1ab6d128789e349efca6dcacd6483133673e4f69"
-  integrity sha512-mG3vm0F6aNxAw5QNEeZ1MH0i3yWpGWxpZauFZTuy2wo2yKZscoAYYBlEF0AUwmdClW6n458EYrXFuC7Vy/a8FA==
+"@tonconnect/sdk@^2.0.7":
+  version "2.0.7"
+  resolved "https://registry.yarnpkg.com/@tonconnect/sdk/-/sdk-2.0.7.tgz#e615b0b82e25572c55c054eb715209d7e56fb56c"
+  integrity sha512-MDbA5RhkVbSQQYXsLuVXLATROSQgDJSIx9Y2HIPohfU44PH6vaJ1cBrv9nogIoAQUM2tNuBXC0w+RcFT+eRTCg==
   dependencies:
     "@tonconnect/protocol" "^2.0.1"
     deepmerge "^4.2.2"
@@ -2757,7 +2757,7 @@ axios@^0.25.0:
   dependencies:
     follow-redirects "^1.14.7"
 
-axios@^0.27.0, axios@^0.27.2:
+axios@^0.27.0:
   version "0.27.2"
   resolved "https://registry.npmjs.org/axios/-/axios-0.27.2.tgz"
   integrity sha512-t+yRIyySRTp/wua5xEr+z1q60QmLq8ABsS5O9Me1AsE5dfKqgnCFzwiCZZ/cGNd1lq4/7akDWMxdhVlucjmnOQ==
@@ -9903,10 +9903,10 @@ ton-crypto@^3.0.0:
     ton-crypto-primitives "2.0.0"
     tweetnacl "1.0.3"
 
-ton-x@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/ton-x/-/ton-x-2.0.0.tgz#c29587698969a747acb80fe8e9d35acbd5562f1c"
-  integrity sha512-APzTmKydNVre2IaDuC8gxmVK/TcJpA5jUER+OrwxKDwRWckzFFzElxVHu6AGilljRHYd45At4QDoHTfsBkUuZA==
+ton-x@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/ton-x/-/ton-x-2.1.0.tgz#d4983a5c487bbcbe76b5e374ad346024afb06b4e"
+  integrity sha512-AJx4kRaRqPdTCQO8ik8E0aICg4NutUgTxnepbjoc7Emi3bMKoANiketmOFK07+vFX9QQO2NoJnqM8kgSsposhw==
   dependencies:
     "@types/bn.js" "^5.1.0"
     axios "^0.27.0"
