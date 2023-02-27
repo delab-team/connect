@@ -263,7 +263,7 @@ class DeLabConnect {
                 validUntil: Date.now() + 1000000,
                 messages: [
                     {
-                        address: Address.parseFriendly(transaction.to).address.toString(),
+                        address: Address.parseFriendly(transaction.to).address.toFriendly(),
                         amount: transaction.value,
                         stateInit: transaction.stateInit,
                         payload: transaction.payload,
