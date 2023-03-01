@@ -153,22 +153,24 @@ const DeLabModal: React.FC<DeLabModalConfig> = (props: DeLabModalConfig) => {
                         <div className="delab-modal-text-icon delab_text">
                         Ton Connect 2.0
                         </div>
+                        <div style={{ height: '260px', overflowY: 'scroll' }}>
 
-                        {tonConnectWallets.map((wallet: any, key) => (
-                            <div className="delab-modal-horizontal-block" key={key}
-                                onClick={
-                                    () => props.DeLabConnectObject.connectTonkeeper(
-                                        wallet
-                                    )
-                                }>
-                                <div className="delab-icon">
-                                    <img src={wallet.imageUrl} />
+                            {tonConnectWallets.map((wallet: any, key) => (
+                                <div className="delab-modal-horizontal-block" key={key}
+                                    onClick={
+                                        () => props.DeLabConnectObject.connectTonkeeper(
+                                            wallet
+                                        )
+                                    }>
+                                    <div className="delab-icon">
+                                        <img src={wallet.imageUrl} />
+                                    </div>
+                                    <span>
+                                        {wallet.name}
+                                    </span>
                                 </div>
-                                <span>
-                                    {wallet.name}
-                                </span>
-                            </div>
-                        ))}
+                            ))}
+                        </div>
                     </div>
                     : null
                 }

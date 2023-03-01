@@ -89,6 +89,32 @@ class DeLabConnect {
             }
         )
 
+        if (window.ton) {
+            if (window.ton.isTonWallet) {
+                window.ton.on('accountsChanged', (wallet: any) => {
+                    if (!wallet) {
+                        return
+                    }
+                    if (wallet.length === 0) {
+                        return
+                    }
+
+                    this._address =  Address.parseRaw(
+                        wallet[0]
+                    ).toFriendly()
+                    this._typeConnect = 'toncoinwallet'
+
+                    DeLabConnect.addStorageData('init',  true)
+                    DeLabConnect.addStorageData('type-connect',  this._typeConnect)
+                    DeLabConnect.addStorageData('address',  this._address)
+                    DeLabConnect.addStorageData('network',  this._network)
+
+                    this.sussesConnect()
+                    this.closeModal()
+                })
+            }
+        }
+
         this.loadWallet()
 
         console.log('v: 1.4.0')
@@ -263,7 +289,7 @@ class DeLabConnect {
                 validUntil: Date.now() + 1000000,
                 messages: [
                     {
-                        address: Address.parseFriendly(transaction.to).address.toString(),
+                        address: Address.parseFriendly(transaction.to).address.toFriendly(),
                         amount: transaction.value,
                         stateInit: transaction.stateInit,
                         payload: transaction.payload,
