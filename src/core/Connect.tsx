@@ -8,7 +8,7 @@ import {
     TonhubWalletConfig
 } from 'ton-x'
 
-import TonConnect, { WalletInfo, WalletInfoRemote } from '@tonconnect/sdk'
+import TonConnect, { WalletConnectionSource, WalletInfo, WalletInfoRemote } from '@tonconnect/sdk'
 
 import { Address } from 'ton'
 import {
@@ -64,7 +64,7 @@ class DeLabConnect {
         // this._hostName = hostNameTonkeeper
         this._tonConnectWallets = []
 
-        this._connectorTonHub = new TonhubConnector({ network: network === 'mainnet' ? 'mainnet' : 'sandbox' })
+        this._connectorTonHub = new TonhubConnector({ network })
         this._connectorTonConnect = new TonConnect({ manifestUrl })
 
         this._connectorTonConnect.restoreConnection()
@@ -89,9 +89,35 @@ class DeLabConnect {
             }
         )
 
+        if (window.ton) {
+            if (window.ton.isTonWallet) {
+                window.ton.on('accountsChanged', (wallet: any) => {
+                    if (!wallet) {
+                        return
+                    }
+                    if (wallet.length === 0) {
+                        return
+                    }
+
+                    this._address =  Address.parseRaw(
+                        wallet[0]
+                    ).toFriendly()
+                    this._typeConnect = 'toncoinwallet'
+
+                    DeLabConnect.addStorageData('init',  true)
+                    DeLabConnect.addStorageData('type-connect',  this._typeConnect)
+                    DeLabConnect.addStorageData('address',  this._address)
+                    DeLabConnect.addStorageData('network',  this._network)
+
+                    this.sussesConnect()
+                    this.closeModal()
+                })
+            }
+        }
+
         this.loadWallet()
 
-        console.log('v: 1.3.2')
+        console.log('v: 1.4.1')
     }
 
     public loadWallet (): void {
@@ -263,7 +289,7 @@ class DeLabConnect {
                 validUntil: Date.now() + 1000000,
                 messages: [
                     {
-                        address: Address.parseFriendly(transaction.to).address.toString(),
+                        address: Address.parseFriendly(transaction.to).address.toFriendly(),
                         amount: transaction.value,
                         stateInit: transaction.stateInit,
                         payload: transaction.payload,
@@ -364,19 +390,24 @@ class DeLabConnect {
 
     public async connectTonkeeper
     (wallet: WalletInfoRemote): Promise<DeLabAddress> {
-        const walletConnectionSource = {
-            universalLink: wallet.universalLink,
-            bridgeUrl: wallet.bridgeUrl
+        let walletConnectionSource: WalletConnectionSource
+        if (wallet.universalLink) {
+            walletConnectionSource = {
+                universalLink: wallet.universalLink,
+                bridgeUrl: wallet.bridgeUrl
+            }
+        } else {
+            walletConnectionSource = { jsBridgeKey: wallet.name.toLocaleLowerCase() }
         }
 
         const universalLink = this._connectorTonConnect.connect(
             walletConnectionSource
         )
-        console.log(universalLink)
+        // console.log(universalLink)
 
         this._tonConnectWallet = wallet
 
-        this.newEvent('link', universalLink)
+        if (universalLink) this.newEvent('link', universalLink)
         return undefined
     }
 

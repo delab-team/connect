@@ -8,13 +8,17 @@ body {
 [scheme=space_gray] {
     --de_lab_background: rgba(0, 0, 0, 1);
     --de_lab_color: #fff;
-    --de_lab_background_opacity: rgba(0, 0, 0, 0.3);
+    --de_lab_background_opacity: rgb(20 20 20);
+    --de_lab_background_hover: rgb(39,42,42);
+    --de_lab_background_hover_opacity: rgb(39,42,42, 0.5);
     --de_lab_color_white: #fff;
 }
 [scheme=bright_light] {
     --de_lab_background: rgba(255, 255, 255, 1);
     --de_lab_color: #000;
-    --de_lab_background_opacity: rgba(255, 255, 255, 0.3);
+    --de_lab_background_opacity: rgba(255, 255, 255);
+    --de_lab_background_hover: rgb(200, 200, 200);
+    --de_lab_background_hover_opacity: rgb(200, 200, 200, 0.5);
     --de_lab_color_white: #fff;
 }
 .delab-modal-root {
@@ -36,21 +40,21 @@ body {
     top: calc(50% - 225px);
     left: calc(50% - 180px);
     border-radius: var(--delab_radius_1)!important;
-    padding: 6px 12px 12px;
+    padding: 8px 18px 18px;
 
     background: var(--de_lab_background_opacity);
-    backdrop-filter: blur( 15px );
-    -webkit-backdrop-filter: blur( 15px );
+    /* backdrop-filter: blur( 15px );
+    -webkit-backdrop-filter: blur( 15px ); */
     border-radius: 10px;
     border: 1px solid rgba( 255, 255, 255, 0.5 );
 
     width: 360px;
-    height: 434px;
+    height: 400px;
     box-sizing: border-box;
     box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.2);
 
     transition: transform 0.2s cubic-bezier(0, 0, 0.09, 1.1);
-    transform: scale(0.96);
+    /* transform: scale(0.96); */
 }
 
 .delab-modal-block:hover {
@@ -70,6 +74,7 @@ body {
 .delab-modal-header * {
     font-weight: 500;
     font-size: 20px;
+    text-decoration: none;
 }
 
 .delab-modal-header-left.delab-disable{
@@ -113,6 +118,8 @@ body {
     justify-content: flex-start;
     align-items: center;
     margin-top: 28px;
+    margin-bottom: 12px;
+    font-size: 16px;
 }
 
 .delab-modal-text-icon .Icon {
@@ -122,14 +129,18 @@ body {
 .delab-modal-content {
     margin-top: 10px;
     margin-bottom: 10px;
+
+    /* display: flex; */
 }
 
 .delab-modal-horizontal {
     display: flex;
     justify-content: space-around;
     align-items: center;
+    flex-direction: column;
 
-    margin: 10px 0px 16px 0px;
+    margin: 20px 0px 16px 0px;
+    /* width: 50%; */
 }
 
 .delab-modal-horizontal-block {
@@ -138,21 +149,24 @@ body {
 
     display: flex;
     align-items: center;
-    justify-content: space-around;
-    flex-direction: column;
+    justify-content: start;
+    /* flex-direction: column; */
+    box-sizing: border-box;
 
-    width: 105px;
-    height: 85px;
+    width: 100%;
+    height: 75px;
 
     cursor: pointer;
 
-    background-color: transparent;
+    /* background-color: transparent; */
+    background-color: var(--de_lab_background_hover_opacity);
 
     transition: background-color .2s;
+    margin-bottom: 16px;
 }
 
 .delab-modal-horizontal-block:hover {
-    background-color: var(--de_lab_background_opacity);
+    background-color: var(--de_lab_background_hover);
 }
 
 .delab-modal-horizontal-block.delab-disalbe {
@@ -166,6 +180,7 @@ body {
     height: 60px;
     position: relative;
     margin-bottom: 2px;
+    margin-right: 16px;
 }
 
 .delab-modal-horizontal-block .delab-icon img {
@@ -177,8 +192,9 @@ body {
 }
 
 .delab-modal-horizontal-block span {
-    font-size: 13px;
+    font-size: 17px;
     opacity: .8;
+    font-weight: 600;
 }
 
 .delab-modal-horizontal-block:hover img {
@@ -204,12 +220,12 @@ body {
 }
 
 .delab-center-block2 {
-    margin: 18px 0px 0px 0px;
+    margin: 1px 0px 0px 0px;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
     flex-direction: column;
-    min-height: calc(434px - 90px);
+    min-height: calc(400px - 90px);
     height: 100%;
 }
 
@@ -217,6 +233,10 @@ body {
     color: var(--de_lab_background)!important;
     text-decoration: none!important;
     font-size: 14px;
+}
+.delab-button-large {
+    width: 100%;
+    padding: 16px;
 }
 
 .qr-delab {
