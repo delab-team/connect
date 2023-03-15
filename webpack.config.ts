@@ -44,17 +44,15 @@ const config: Configuration = {
             {
                 test: /\.(jpe?g|gif|png|svg)$/i,
                 use: [
-                {
-                  loader: 'file-loader',
-                  options: {
-                    limit: 10000
-                  }
-                }
-              ]
+                    {
+                        loader: 'file-loader',
+                        options: { limit: 10000 }
+                    }
+                ]
             }
         ]
     },
-    ignoreWarnings: [/Failed to parse source map/],
+    ignoreWarnings: [ /Failed to parse source map/ ],
     output: {
         filename: '[name].js',
         path: path.resolve(__dirname, 'build')
@@ -62,9 +60,7 @@ const config: Configuration = {
     plugins: [
         new HtmlWebpackPlugin({ template: path.join(__dirname, 'example/public', 'index.html') }),
         new SourceMapDevToolPlugin({ filename: '[file].map' }),
-        new ProvidePlugin({
-            Buffer: ['buffer', 'Buffer'],
-        }),
+        new ProvidePlugin({ Buffer: [ 'buffer', 'Buffer' ] }),
         new ProvidePlugin({ process: 'process/browser' })
     ],
     resolve: {
