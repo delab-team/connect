@@ -11,11 +11,12 @@ import * as QRoptions from './qr.json'
 import './static/modal.css'
 import './static/style.css'
 
-const white = 'https://ipfs.filebase.io/ipfs/bafkreigpmboyvo43fa4ybalflby3pb3eg2emgzn7axkgd7rmvrgdpx4oja'
-const black = 'https://ipfs.filebase.io/ipfs/bafkreibbn3nq6avodph3lcg6qlak6tbjha7levxzwgyk7nyrwot3ajvuwq'
-const tonhubLogo = 'https://ipfs.filebase.io/ipfs/bafkreidr3kjxine5hgjxq45ybgqep5vr7lh5kldhyjbzvhh2hd2ukyuae4'
-const tonkeeperLogo = 'https://ipfs.filebase.io/ipfs/bafkreia4powgq5jmqpgffbvxqlwjfecnafx2qx4lfpywsloz3ikffnnmya'
-const toncoinwalletLogo = 'https://ipfs.filebase.io/ipfs/bafkreidzi6kpvacf67lb5n45gjhrx2jhv3fjmr4kl5zmeqw7ks3wemfuqe'
+import white from './static/img/white.png'
+import black from './static/img/black.png'
+
+import tonhubLogo from './static/img/tonhub.png'
+import tonkeeperLogo from './static/img/tonkeeper.png'
+import toncoinwalletLogo from './static/img/toncoin.png'
 
 const options: any = QRoptions
 const qrCode = new QRCodeStyling(options)
@@ -29,7 +30,7 @@ const DeLabModal: React.FC<DeLabModalConfig> = (props: DeLabModalConfig) => {
 
     const [ tonConnectWallets, setTonConnectWallets ] = useState<Array<WalletInfo>>([])
 
-    const isDesktop = window.innerWidth >= 1000
+    const isDesktop = window.innerWidth >= 700
 
     const ref = useRef<HTMLDivElement | null>(null)
 

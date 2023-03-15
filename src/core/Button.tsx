@@ -4,13 +4,13 @@ import './static/style.css'
 
 import { DeLabButtonConfig } from './types/react'
 
-const white = 'https://ipfs.filebase.io/ipfs/bafkreigpmboyvo43fa4ybalflby3pb3eg2emgzn7axkgd7rmvrgdpx4oja'
-const black = 'https://ipfs.filebase.io/ipfs/bafkreibbn3nq6avodph3lcg6qlak6tbjha7levxzwgyk7nyrwot3ajvuwq'
+import whiteLogo from './static/img/white.png'
+import blackLogo from './static/img/black.png'
 
 export const DeLabButton = React.memo(
     (props: DeLabButtonConfig) => (
         <div onClick={() => props.DeLabConnectObject.openModal()} className="delab-button">
-            <img src={props.scheme === 'light' ? white : black} className="delab-logo" />
+            <img src={props.scheme === 'light' ? whiteLogo : blackLogo} className="delab-logo" />
             <span>DeLab Connect</span>
         </div>
     )
