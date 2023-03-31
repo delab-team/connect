@@ -23,6 +23,7 @@ export const App: React.FC = () => {
     const [ network, setNetwork ] = React.useState<DeLabNetwork>('mainnet')
     const [ typeConnect, setTypeConnect ] = React.useState<DeLabTypeConnect>(undefined)
 
+    
     const [ dataTx, setDataTx ] = React.useState<any>(null)
 
     const [ approveLink, setApproveLink ] = React.useState<string>('')
