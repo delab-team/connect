@@ -8,7 +8,7 @@ import {
     TonhubWalletConfig
 } from 'ton-x'
 
-import TonConnect, { WalletConnectionSource, WalletInfo, WalletInfoRemote } from '@tonconnect/sdk'
+import TonConnect, { WalletConnectionSource, WalletInfo, WalletInfoInjected, WalletInfoRemote } from '@tonconnect/sdk'
 
 import { Address } from 'ton'
 import {
@@ -71,7 +71,7 @@ class DeLabConnect {
 
         this._connectorTonConnect.onStatusChange(
             (walletInfo) => {
-                console.log(walletInfo)
+                console.log('walletInfo', walletInfo)
                 if (this._connectorTonConnect.connected && walletInfo) {
                     this._address =  Address.parseRaw(
                         walletInfo.account.address
@@ -117,7 +117,7 @@ class DeLabConnect {
 
         this.loadWallet()
 
-        console.log('v: 1.4.2')
+        console.log('v: 1.4.3')
     }
 
     public loadWallet (): void {
@@ -389,15 +389,15 @@ class DeLabConnect {
     }
 
     public async connectTonkeeper
-    (wallet: WalletInfoRemote): Promise<DeLabAddress> {
+    (wallet: WalletInfo): Promise<DeLabAddress> {
         let walletConnectionSource: WalletConnectionSource
-        if (wallet.universalLink) {
+        if ((<WalletInfoRemote>wallet).universalLink) {
             walletConnectionSource = {
-                universalLink: wallet.universalLink,
-                bridgeUrl: wallet.bridgeUrl
+                universalLink: (<WalletInfoRemote>wallet).universalLink,
+                bridgeUrl: (<WalletInfoRemote>wallet).bridgeUrl
             }
         } else {
-            walletConnectionSource = { jsBridgeKey: wallet.name.toLocaleLowerCase() }
+            walletConnectionSource = { jsBridgeKey: (<WalletInfoInjected>wallet).jsBridgeKey }
         }
 
         const universalLink = this._connectorTonConnect.connect(

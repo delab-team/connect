@@ -41,6 +41,15 @@ const DeLabModal: React.FC<DeLabModalConfig> = (props: DeLabModalConfig) => {
         link2.click()
     }
 
+    const DeWallet: WalletInfo = {
+        jsBridgeKey: 'dewallet',
+        injected: true,
+        embedded: false,
+        name: 'DeWallet',
+        imageUrl: 'https://delabwallet.com/logo_black.png',
+        aboutUrl: 'https://delabwallet.com'
+    }
+
     function registerListen () {
         props.DeLabConnectObject.on('modal', (data: DeLabEvent) => {
             setIsOpenModal(data.data ?? false)
@@ -89,6 +98,7 @@ const DeLabModal: React.FC<DeLabModalConfig> = (props: DeLabModalConfig) => {
     }, [ type ])
 
     useEffect(() => {
+        console.log('wallets', props.DeLabConnectObject.tonConnectWallets)
         setTonConnectWallets(props.DeLabConnectObject.tonConnectWallets ?? [])
     }, [ props.DeLabConnectObject.tonConnectWallets ])
 
@@ -171,6 +181,20 @@ const DeLabModal: React.FC<DeLabModalConfig> = (props: DeLabModalConfig) => {
                                     </span>
                                 </div>
                             ))}
+
+                            <div className="delab-modal-horizontal-block"
+                                onClick={
+                                    () => props.DeLabConnectObject.connectTonkeeper(
+                                        DeWallet
+                                    )
+                                }>
+                                <div className="delab-icon">
+                                    <img src={DeWallet.imageUrl} />
+                                </div>
+                                <span>
+                                    {DeWallet.name}
+                                </span>
+                            </div>
                         </div>
                     </div>
                     : null
