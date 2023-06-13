@@ -60,11 +60,11 @@ const config: Configuration = {
         new ProvidePlugin({
             Buffer: ['buffer', 'Buffer'],
         }),
-        new ProvidePlugin({ process: 'process/browser' })
+        new ProvidePlugin({ process: 'process/browser.js' })
     ],
     resolve: {
         extensions: [ '.ts', '.tsx', '.js' ],
-        alias: { process: 'process/browser',
+        alias: { process: 'process/browser.js',
             // react: require.resolve("react"),
             // 'react-dom': require.resolve('react-dom')
         },

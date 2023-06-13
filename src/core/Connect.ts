@@ -55,7 +55,7 @@ class DeLabConnect {
         appUrl: string,
         appName: string,
         network: DeLabNetwork = 'mainnet',
-        manifestUrl: string = 'https://ipfs.filebase.io/ipfs/bafkreib7l74fuh7gmmmnwjoy3j4si74tdwgegw6gabuebfskolipuuia6i'
+        manifestUrl: string = 'https://cloudflare-ipfs.com/ipfs/bafkreib7l74fuh7gmmmnwjoy3j4si74tdwgegw6gabuebfskolipuuia6i'
     ) {
         this._appUrl = appUrl
         this._appName = appName
@@ -117,7 +117,7 @@ class DeLabConnect {
 
         this.loadWallet()
 
-        console.log('v: 1.4.3')
+        console.log('v: 1.4.4')
     }
 
     public loadWallet (): void {

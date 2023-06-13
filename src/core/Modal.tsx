@@ -182,7 +182,7 @@ const DeLabModal: React.FC<DeLabModalConfig> = (props: DeLabModalConfig) => {
                                 </div>
                             ))}
 
-                            <div className="delab-modal-horizontal-block"
+                            {/* <div className="delab-modal-horizontal-block"
                                 onClick={
                                     () => props.DeLabConnectObject.connectTonkeeper(
                                         DeWallet
@@ -194,7 +194,7 @@ const DeLabModal: React.FC<DeLabModalConfig> = (props: DeLabModalConfig) => {
                                 <span>
                                     {DeWallet.name}
                                 </span>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                     : null
